@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.ware.mapper.PurchaseMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.ware.entity.Purchase">
+    <!--@mbg.generated-->
+    <!--@Table wms_purchase-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="assignee_id" jdbcType="BIGINT" property="assigneeId" />
+    <result column="assignee_name" jdbcType="VARCHAR" property="assigneeName" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, assignee_id, assignee_name, phone, priority, `status`, ware_id, amount, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from wms_purchase
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from wms_purchase
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.ware.entity.Purchase" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wms_purchase (assignee_id, assignee_name, phone, 
+      priority, `status`, ware_id, 
+      amount, create_time, update_time
+      )
+    values (#{assigneeId,jdbcType=BIGINT}, #{assigneeName,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
+      #{priority,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{wareId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.ware.entity.Purchase" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wms_purchase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assigneeId != null">
+        assignee_id,
+      </if>
+      <if test="assigneeName != null">
+        assignee_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="wareId != null">
+        ware_id,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assigneeId != null">
+        #{assigneeId,jdbcType=BIGINT},
+      </if>
+      <if test="assigneeName != null">
+        #{assigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="wareId != null">
+        #{wareId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.ware.entity.Purchase">
+    <!--@mbg.generated-->
+    update wms_purchase
+    <set>
+      <if test="assigneeId != null">
+        assignee_id = #{assigneeId,jdbcType=BIGINT},
+      </if>
+      <if test="assigneeName != null">
+        assignee_name = #{assigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="wareId != null">
+        ware_id = #{wareId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.ware.entity.Purchase">
+    <!--@mbg.generated-->
+    update wms_purchase
+    set assignee_id = #{assigneeId,jdbcType=BIGINT},
+      assignee_name = #{assigneeName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      ware_id = #{wareId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    select * from wms_purchase where 1=1
+    <if test="params.status !=null">
+     and status=#{params.status}
+    </if>
+    <if test="params.key!=null and params.key!=''">
+      and (assignee_id=#{params.key} or assignee_name#{params.key})
+    </if>
+    </select>
+
+  <select id="getUnreceiveList" resultMap="BaseResultMap">
+    select * from wms_purchase where status=1 or status=0
+  </select>
+
+  <update id="batchUpdate" >
+    <foreach collection="purchases" item="purchase" separator=";">
+      update wms_purchase
+      <set>
+        <if test="purchase.assigneeId != null">
+          assignee_id = #{purchase.assigneeId,jdbcType=BIGINT},
+        </if>
+        <if test="purchase.assigneeName != null ">
+          assignee_name = #{purchase.assigneeName,jdbcType=VARCHAR},
+        </if>
+        <if test="purchase.phone != null">
+          phone = #{purchase.phone,jdbcType=CHAR},
+        </if>
+        <if test="purchase.priority != null">
+          priority = #{purchase.priority,jdbcType=INTEGER},
+        </if>
+        <if test="purchase.status != null">
+          `status` = #{purchase.status,jdbcType=INTEGER},
+        </if>
+        <if test="purchase.wareId != null">
+          ware_id = #{purchase.wareId,jdbcType=BIGINT},
+        </if>
+        <if test="purchase.amount != null">
+          amount = #{purchase.amount,jdbcType=DECIMAL},
+        </if>
+        <if test="purchase.createTime != null">
+          create_time = #{purchase.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="purchase.updateTime != null">
+          update_time = #{purchase.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where id = #{purchase.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+
+  <delete id="batchDel" >
+    delete  from wms_purchase where id in
+    <foreach collection="ids " item="id" separator=",">
+      (#{id})
+    </foreach>
+    </delete>
+</mapper>

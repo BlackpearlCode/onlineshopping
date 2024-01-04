@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.product.mapper.PmsSkuImagesMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.product.entity.PmsSkuImages">
+    <!--@mbg.generated-->
+    <!--@Table pms_sku_images-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="img_sort" jdbcType="INTEGER" property="imgSort" />
+    <result column="default_img" jdbcType="INTEGER" property="defaultImg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, sku_id, img_url, img_sort, default_img
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_sku_images
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_sku_images
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.product.entity.PmsSkuImages" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_sku_images (sku_id, img_url, img_sort, 
+      default_img)
+    values (#{skuId,jdbcType=BIGINT}, #{imgUrl,jdbcType=VARCHAR}, #{imgSort,jdbcType=INTEGER}, 
+      #{defaultImg,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.product.entity.PmsSkuImages" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_sku_images
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="imgSort != null">
+        img_sort,
+      </if>
+      <if test="defaultImg != null">
+        default_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSort != null">
+        #{imgSort,jdbcType=INTEGER},
+      </if>
+      <if test="defaultImg != null">
+        #{defaultImg,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.product.entity.PmsSkuImages">
+    <!--@mbg.generated-->
+    update pms_sku_images
+    <set>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSort != null">
+        img_sort = #{imgSort,jdbcType=INTEGER},
+      </if>
+      <if test="defaultImg != null">
+        default_img = #{defaultImg,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.product.entity.PmsSkuImages">
+    <!--@mbg.generated-->
+    update pms_sku_images
+    set sku_id = #{skuId,jdbcType=BIGINT},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      img_sort = #{imgSort,jdbcType=INTEGER},
+      default_img = #{defaultImg,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="batchSave" >
+    insert into pms_sku_images (sku_id, img_url,default_img)
+    values
+      <foreach collection="imagesList" item="item"  separator="," >
+        (#{item.skuId},#{item.imgUrl},#{item.defaultImg})
+      </foreach>
+    </insert>
+
+  <select id="selectBySkuId" resultMap="BaseResultMap">
+    select * from pms_sku_images where sku_id=#{skuId,jdbcType=BIGINT}
+  </select>
+</mapper>

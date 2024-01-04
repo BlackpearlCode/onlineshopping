@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.SeckillSkuNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.SeckillSkuNotice">
+    <!--@mbg.generated-->
+    <!--@Table sms_seckill_sku_notice-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="session_id" jdbcType="BIGINT" property="sessionId" />
+    <result column="subcribe_time" jdbcType="TIMESTAMP" property="subcribeTime" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="notice_type" jdbcType="BOOLEAN" property="noticeType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, member_id, sku_id, session_id, subcribe_time, send_time, notice_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_seckill_sku_notice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_seckill_sku_notice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SeckillSkuNotice" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_seckill_sku_notice (member_id, sku_id, session_id, 
+      subcribe_time, send_time, notice_type
+      )
+    values (#{memberId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{sessionId,jdbcType=BIGINT}, 
+      #{subcribeTime,jdbcType=TIMESTAMP}, #{sendTime,jdbcType=TIMESTAMP}, #{noticeType,jdbcType=BOOLEAN}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SeckillSkuNotice" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_seckill_sku_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="sessionId != null">
+        session_id,
+      </if>
+      <if test="subcribeTime != null">
+        subcribe_time,
+      </if>
+      <if test="sendTime != null">
+        send_time,
+      </if>
+      <if test="noticeType != null">
+        notice_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=BIGINT},
+      </if>
+      <if test="subcribeTime != null">
+        #{subcribeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendTime != null">
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticeType != null">
+        #{noticeType,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.SeckillSkuNotice">
+    <!--@mbg.generated-->
+    update sms_seckill_sku_notice
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="sessionId != null">
+        session_id = #{sessionId,jdbcType=BIGINT},
+      </if>
+      <if test="subcribeTime != null">
+        subcribe_time = #{subcribeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendTime != null">
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticeType != null">
+        notice_type = #{noticeType,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.SeckillSkuNotice">
+    <!--@mbg.generated-->
+    update sms_seckill_sku_notice
+    set member_id = #{memberId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      session_id = #{sessionId,jdbcType=BIGINT},
+      subcribe_time = #{subcribeTime,jdbcType=TIMESTAMP},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      notice_type = #{noticeType,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

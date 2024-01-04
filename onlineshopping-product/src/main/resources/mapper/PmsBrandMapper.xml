@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.product.mapper.PmsBrandMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.product.entity.PmsBrand">
+    <!--@mbg.generated-->
+    <!--@Table pms_brand-->
+    <id column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="descript" jdbcType="LONGVARCHAR" property="descript" />
+    <result column="show_status" jdbcType="INTEGER" property="showStatus" />
+    <result column="first_letter" jdbcType="CHAR" property="firstLetter" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    brand_id, `name`, logo, descript, show_status, first_letter, sort
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_brand
+    where brand_id = #{brandId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_brand
+    where brand_id = #{brandId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="brand_id" keyProperty="brandId" parameterType="com.onlineshopping.product.entity.PmsBrand" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_brand (`name`, logo, descript, 
+      show_status, first_letter, sort
+      )
+    values (#{name,jdbcType=CHAR}, #{logo,jdbcType=VARCHAR}, #{descript,jdbcType=LONGVARCHAR}, 
+      #{showStatus,jdbcType=TINYINT}, #{firstLetter,jdbcType=CHAR}, #{sort,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="brand_id" keyProperty="brandId" parameterType="com.onlineshopping.product.entity.PmsBrand" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_brand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="descript != null">
+        descript,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="firstLetter != null">
+        first_letter,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="descript != null">
+        #{descript,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="firstLetter != null">
+        #{firstLetter,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.product.entity.PmsBrand">
+    <!--@mbg.generated-->
+    update pms_brand
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=CHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="descript != null">
+        descript = #{descript,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showStatus != null">
+        show_status = #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="firstLetter != null">
+        first_letter = #{firstLetter,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where brand_id = #{brandId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.product.entity.PmsBrand">
+    <!--@mbg.generated-->
+    update pms_brand
+    set `name` = #{name,jdbcType=CHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      descript = #{descript,jdbcType=LONGVARCHAR},
+      show_status = #{showStatus,jdbcType=TINYINT},
+      first_letter = #{firstLetter,jdbcType=CHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where brand_id = #{brandId,jdbcType=BIGINT}
+  </update>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select * from pms_brand  order by  brand_id DESC
+  </select>
+
+  <delete id="BatchDelete" parameterType = "java.util.List">
+    delete from pms_brand
+    where brand_id in
+    <foreach collection="list" item="item" open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select * from pms_brand where name=#{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getBrands" resultMap="BaseResultMap">
+    select * from pms_brand where brand_id in
+    <foreach collection="ids" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    </select>
+</mapper>

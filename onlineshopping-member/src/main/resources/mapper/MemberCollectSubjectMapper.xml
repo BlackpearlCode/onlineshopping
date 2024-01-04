@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.member.mapper.MemberCollectSubjectMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.member.entity.MemberCollectSubject">
+    <!--@mbg.generated-->
+    <!--@Table ums_member_collect_subject-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+    <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
+    <result column="subject_img" jdbcType="VARCHAR" property="subjectImg" />
+    <result column="subject_urll" jdbcType="VARCHAR" property="subjectUrll" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, subject_id, subject_name, subject_img, subject_urll
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from ums_member_collect_subject
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from ums_member_collect_subject
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.member.entity.MemberCollectSubject" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ums_member_collect_subject (subject_id, subject_name, subject_img, 
+      subject_urll)
+    values (#{subjectId,jdbcType=BIGINT}, #{subjectName,jdbcType=VARCHAR}, #{subjectImg,jdbcType=VARCHAR}, 
+      #{subjectUrll,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.member.entity.MemberCollectSubject" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ums_member_collect_subject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="subjectName != null">
+        subject_name,
+      </if>
+      <if test="subjectImg != null">
+        subject_img,
+      </if>
+      <if test="subjectUrll != null">
+        subject_urll,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectName != null">
+        #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectImg != null">
+        #{subjectImg,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectUrll != null">
+        #{subjectUrll,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.member.entity.MemberCollectSubject">
+    <!--@mbg.generated-->
+    update ums_member_collect_subject
+    <set>
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectName != null">
+        subject_name = #{subjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectImg != null">
+        subject_img = #{subjectImg,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectUrll != null">
+        subject_urll = #{subjectUrll,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.member.entity.MemberCollectSubject">
+    <!--@mbg.generated-->
+    update ums_member_collect_subject
+    set subject_id = #{subjectId,jdbcType=BIGINT},
+      subject_name = #{subjectName,jdbcType=VARCHAR},
+      subject_img = #{subjectImg,jdbcType=VARCHAR},
+      subject_urll = #{subjectUrll,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

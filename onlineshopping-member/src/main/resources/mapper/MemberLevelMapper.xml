@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.member.mapper.MemberLevelMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.member.entity.MemberLevel">
+    <!--@mbg.generated-->
+    <!--@Table ums_member_level-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="growth_point" jdbcType="INTEGER" property="growthPoint" />
+    <result column="default_status" jdbcType="TINYINT" property="defaultStatus" />
+    <result column="free_freight_point" jdbcType="DECIMAL" property="freeFreightPoint" />
+    <result column="comment_growth_point" jdbcType="INTEGER" property="commentGrowthPoint" />
+    <result column="priviledge_free_freight" jdbcType="TINYINT" property="priviledgeFreeFreight" />
+    <result column="priviledge_member_price" jdbcType="TINYINT" property="priviledgeMemberPrice" />
+    <result column="priviledge_birthday" jdbcType="TINYINT" property="priviledgeBirthday" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, growth_point, default_status, free_freight_point, comment_growth_point, 
+    priviledge_free_freight, priviledge_member_price, priviledge_birthday, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from ums_member_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from ums_member_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.member.entity.MemberLevel" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ums_member_level (`name`, growth_point, default_status, 
+      free_freight_point, comment_growth_point, priviledge_free_freight, 
+      priviledge_member_price, priviledge_birthday, 
+      note)
+    values (#{name,jdbcType=VARCHAR}, #{growthPoint,jdbcType=INTEGER}, #{defaultStatus,jdbcType=TINYINT}, 
+      #{freeFreightPoint,jdbcType=DECIMAL}, #{commentGrowthPoint,jdbcType=INTEGER}, #{priviledgeFreeFreight,jdbcType=TINYINT}, 
+      #{priviledgeMemberPrice,jdbcType=TINYINT}, #{priviledgeBirthday,jdbcType=TINYINT}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.member.entity.MemberLevel" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ums_member_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="growthPoint != null">
+        growth_point,
+      </if>
+      <if test="defaultStatus != null">
+        default_status,
+      </if>
+      <if test="freeFreightPoint != null">
+        free_freight_point,
+      </if>
+      <if test="commentGrowthPoint != null">
+        comment_growth_point,
+      </if>
+      <if test="priviledgeFreeFreight != null">
+        priviledge_free_freight,
+      </if>
+      <if test="priviledgeMemberPrice != null">
+        priviledge_member_price,
+      </if>
+      <if test="priviledgeBirthday != null">
+        priviledge_birthday,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="growthPoint != null">
+        #{growthPoint,jdbcType=INTEGER},
+      </if>
+      <if test="defaultStatus != null">
+        #{defaultStatus,jdbcType=TINYINT},
+      </if>
+      <if test="freeFreightPoint != null">
+        #{freeFreightPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="commentGrowthPoint != null">
+        #{commentGrowthPoint,jdbcType=INTEGER},
+      </if>
+      <if test="priviledgeFreeFreight != null">
+        #{priviledgeFreeFreight,jdbcType=TINYINT},
+      </if>
+      <if test="priviledgeMemberPrice != null">
+        #{priviledgeMemberPrice,jdbcType=TINYINT},
+      </if>
+      <if test="priviledgeBirthday != null">
+        #{priviledgeBirthday,jdbcType=TINYINT},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.member.entity.MemberLevel">
+    <!--@mbg.generated-->
+    update ums_member_level
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="growthPoint != null">
+        growth_point = #{growthPoint,jdbcType=INTEGER},
+      </if>
+      <if test="defaultStatus != null">
+        default_status = #{defaultStatus,jdbcType=TINYINT},
+      </if>
+      <if test="freeFreightPoint != null">
+        free_freight_point = #{freeFreightPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="commentGrowthPoint != null">
+        comment_growth_point = #{commentGrowthPoint,jdbcType=INTEGER},
+      </if>
+      <if test="priviledgeFreeFreight != null">
+        priviledge_free_freight = #{priviledgeFreeFreight,jdbcType=TINYINT},
+      </if>
+      <if test="priviledgeMemberPrice != null">
+        priviledge_member_price = #{priviledgeMemberPrice,jdbcType=TINYINT},
+      </if>
+      <if test="priviledgeBirthday != null">
+        priviledge_birthday = #{priviledgeBirthday,jdbcType=TINYINT},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.member.entity.MemberLevel">
+    <!--@mbg.generated-->
+    update ums_member_level
+    set `name` = #{name,jdbcType=VARCHAR},
+      growth_point = #{growthPoint,jdbcType=INTEGER},
+      default_status = #{defaultStatus,jdbcType=TINYINT},
+      free_freight_point = #{freeFreightPoint,jdbcType=DECIMAL},
+      comment_growth_point = #{commentGrowthPoint,jdbcType=INTEGER},
+      priviledge_free_freight = #{priviledgeFreeFreight,jdbcType=TINYINT},
+      priviledge_member_price = #{priviledgeMemberPrice,jdbcType=TINYINT},
+      priviledge_birthday = #{priviledgeBirthday,jdbcType=TINYINT},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from ums_member_level
+    <if test="_parameter != null and _parameter != ''">
+      where id= #{key,jdbcType=VARCHAR} or name=#{key,jdbcType=VARCHAR}
+    </if>
+    </select>
+
+  <delete id="batchDeleteById" >
+    delete from ums_member_level
+    where id in
+    <foreach collection="ids" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="getDefaultLevel" resultMap="BaseResultMap">
+    select * from ums_member_level where default_status=1
+    </select>
+</mapper>

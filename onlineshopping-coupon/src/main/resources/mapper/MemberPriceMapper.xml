@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.MemberPriceMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.MemberPrice">
+    <!--@mbg.generated-->
+    <!--@Table sms_member_price-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="member_level_id" jdbcType="BIGINT" property="memberLevelId" />
+    <result column="member_level_name" jdbcType="VARCHAR" property="memberLevelName" />
+    <result column="member_price" jdbcType="DECIMAL" property="memberPrice" />
+    <result column="add_other" jdbcType="BOOLEAN" property="addOther" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, sku_id, member_level_id, member_level_name, member_price, add_other
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_member_price
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_member_price
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.MemberPrice" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_member_price (sku_id, member_level_id, member_level_name, 
+      member_price, add_other)
+    values (#{skuId,jdbcType=BIGINT}, #{memberLevelId,jdbcType=BIGINT}, #{memberLevelName,jdbcType=VARCHAR}, 
+      #{memberPrice,jdbcType=DECIMAL}, #{addOther,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.MemberPrice" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_member_price
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="memberLevelId != null">
+        member_level_id,
+      </if>
+      <if test="memberLevelName != null">
+        member_level_name,
+      </if>
+      <if test="memberPrice != null">
+        member_price,
+      </if>
+      <if test="addOther != null">
+        add_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="memberLevelId != null">
+        #{memberLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="memberLevelName != null">
+        #{memberLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPrice != null">
+        #{memberPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addOther != null">
+        #{addOther,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.MemberPrice">
+    <!--@mbg.generated-->
+    update sms_member_price
+    <set>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="memberLevelId != null">
+        member_level_id = #{memberLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="memberLevelName != null">
+        member_level_name = #{memberLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPrice != null">
+        member_price = #{memberPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="addOther != null">
+        add_other = #{addOther,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.MemberPrice">
+    <!--@mbg.generated-->
+    update sms_member_price
+    set sku_id = #{skuId,jdbcType=BIGINT},
+      member_level_id = #{memberLevelId,jdbcType=BIGINT},
+      member_level_name = #{memberLevelName,jdbcType=VARCHAR},
+      member_price = #{memberPrice,jdbcType=DECIMAL},
+      add_other = #{addOther,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="batchSave" >
+    insert into sms_member_price (sku_id, member_level_id, member_level_name,member_price, add_other)
+    values
+      <foreach collection="list" item="item"  separator=",">
+        (#{item.skuId},#{item.memberLevelId},#{item.memberLevelName},#{item.memberPrice},#{item.addOther})
+      </foreach>
+    </insert>
+</mapper>

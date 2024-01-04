@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.CouponHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.CouponHistory">
+    <!--@mbg.generated-->
+    <!--@Table sms_coupon_history-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
+    <result column="get_type" jdbcType="BOOLEAN" property="getType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="use_type" jdbcType="BOOLEAN" property="useType" />
+    <result column="use_time" jdbcType="TIMESTAMP" property="useTime" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_sn" jdbcType="BIGINT" property="orderSn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, coupon_id, member_id, member_nick_name, get_type, create_time, use_type, use_time, 
+    order_id, order_sn
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_coupon_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_coupon_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.CouponHistory" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_coupon_history (coupon_id, member_id, member_nick_name, 
+      get_type, create_time, use_type, 
+      use_time, order_id, order_sn
+      )
+    values (#{couponId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, 
+      #{getType,jdbcType=BOOLEAN}, #{createTime,jdbcType=TIMESTAMP}, #{useType,jdbcType=BOOLEAN}, 
+      #{useTime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.CouponHistory" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_coupon_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="couponId != null">
+        coupon_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberNickName != null">
+        member_nick_name,
+      </if>
+      <if test="getType != null">
+        get_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="useType != null">
+        use_type,
+      </if>
+      <if test="useTime != null">
+        use_time,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderSn != null">
+        order_sn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="couponId != null">
+        #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberNickName != null">
+        #{memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="getType != null">
+        #{getType,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useType != null">
+        #{useType,jdbcType=BOOLEAN},
+      </if>
+      <if test="useTime != null">
+        #{useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.CouponHistory">
+    <!--@mbg.generated-->
+    update sms_coupon_history
+    <set>
+      <if test="couponId != null">
+        coupon_id = #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberNickName != null">
+        member_nick_name = #{memberNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="getType != null">
+        get_type = #{getType,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useType != null">
+        use_type = #{useType,jdbcType=BOOLEAN},
+      </if>
+      <if test="useTime != null">
+        use_time = #{useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.CouponHistory">
+    <!--@mbg.generated-->
+    update sms_coupon_history
+    set coupon_id = #{couponId,jdbcType=BIGINT},
+      member_id = #{memberId,jdbcType=BIGINT},
+      member_nick_name = #{memberNickName,jdbcType=VARCHAR},
+      get_type = #{getType,jdbcType=BOOLEAN},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      use_type = #{useType,jdbcType=BOOLEAN},
+      use_time = #{useTime,jdbcType=TIMESTAMP},
+      order_id = #{orderId,jdbcType=BIGINT},
+      order_sn = #{orderSn,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

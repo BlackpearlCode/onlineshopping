@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.SeckillSkuRelationMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.SeckillSkuRelation">
+    <!--@mbg.generated-->
+    <!--@Table sms_seckill_sku_relation-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="promotion_id" jdbcType="BIGINT" property="promotionId" />
+    <result column="promotion_session_id" jdbcType="BIGINT" property="promotionSessionId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="seckill_price" jdbcType="DECIMAL" property="seckillPrice" />
+    <result column="seckill_count" jdbcType="INTEGER" property="seckillCount" />
+    <result column="seckill_limit" jdbcType="INTEGER" property="seckillLimit" />
+    <result column="seckill_sort" jdbcType="INTEGER" property="seckillSort" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, promotion_id, promotion_session_id, sku_id, seckill_price, seckill_count, seckill_limit, 
+    seckill_sort
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_seckill_sku_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_seckill_sku_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SeckillSkuRelation" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_seckill_sku_relation (promotion_id, promotion_session_id, sku_id, 
+      seckill_price, seckill_count, seckill_limit, 
+      seckill_sort)
+    values (#{promotionId,jdbcType=BIGINT}, #{promotionSessionId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{seckillPrice,jdbcType=DECIMAL}, #{seckillCount,jdbcType=INTEGER}, #{seckillLimit,jdbcType=INTEGER}, 
+      #{seckillSort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SeckillSkuRelation" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_seckill_sku_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="promotionId != null">
+        promotion_id,
+      </if>
+      <if test="promotionSessionId != null">
+        promotion_session_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="seckillPrice != null">
+        seckill_price,
+      </if>
+      <if test="seckillCount != null">
+        seckill_count,
+      </if>
+      <if test="seckillLimit != null">
+        seckill_limit,
+      </if>
+      <if test="seckillSort != null">
+        seckill_sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="promotionId != null">
+        #{promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionSessionId != null">
+        #{promotionSessionId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="seckillPrice != null">
+        #{seckillPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="seckillCount != null">
+        #{seckillCount,jdbcType=INTEGER},
+      </if>
+      <if test="seckillLimit != null">
+        #{seckillLimit,jdbcType=INTEGER},
+      </if>
+      <if test="seckillSort != null">
+        #{seckillSort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.SeckillSkuRelation">
+    <!--@mbg.generated-->
+    update sms_seckill_sku_relation
+    <set>
+      <if test="promotionId != null">
+        promotion_id = #{promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionSessionId != null">
+        promotion_session_id = #{promotionSessionId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="seckillPrice != null">
+        seckill_price = #{seckillPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="seckillCount != null">
+        seckill_count = #{seckillCount,jdbcType=INTEGER},
+      </if>
+      <if test="seckillLimit != null">
+        seckill_limit = #{seckillLimit,jdbcType=INTEGER},
+      </if>
+      <if test="seckillSort != null">
+        seckill_sort = #{seckillSort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.SeckillSkuRelation">
+    <!--@mbg.generated-->
+    update sms_seckill_sku_relation
+    set promotion_id = #{promotionId,jdbcType=BIGINT},
+      promotion_session_id = #{promotionSessionId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      seckill_price = #{seckillPrice,jdbcType=DECIMAL},
+      seckill_count = #{seckillCount,jdbcType=INTEGER},
+      seckill_limit = #{seckillLimit,jdbcType=INTEGER},
+      seckill_sort = #{seckillSort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

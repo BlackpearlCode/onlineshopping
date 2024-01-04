@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.order.mapper.RefundInfoMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.order.entity.RefundInfo">
+    <!--@mbg.generated-->
+    <!--@Table oms_refund_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_return_id" jdbcType="BIGINT" property="orderReturnId" />
+    <result column="refund" jdbcType="DECIMAL" property="refund" />
+    <result column="refund_sn" jdbcType="VARCHAR" property="refundSn" />
+    <result column="refund_status" jdbcType="BOOLEAN" property="refundStatus" />
+    <result column="refund_channel" jdbcType="TINYINT" property="refundChannel" />
+    <result column="refund_content" jdbcType="VARCHAR" property="refundContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, order_return_id, refund, refund_sn, refund_status, refund_channel, refund_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from oms_refund_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from oms_refund_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.RefundInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_refund_info (order_return_id, refund, refund_sn, 
+      refund_status, refund_channel, refund_content
+      )
+    values (#{orderReturnId,jdbcType=BIGINT}, #{refund,jdbcType=DECIMAL}, #{refundSn,jdbcType=VARCHAR}, 
+      #{refundStatus,jdbcType=BOOLEAN}, #{refundChannel,jdbcType=TINYINT}, #{refundContent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.RefundInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_refund_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderReturnId != null">
+        order_return_id,
+      </if>
+      <if test="refund != null">
+        refund,
+      </if>
+      <if test="refundSn != null">
+        refund_sn,
+      </if>
+      <if test="refundStatus != null">
+        refund_status,
+      </if>
+      <if test="refundChannel != null">
+        refund_channel,
+      </if>
+      <if test="refundContent != null">
+        refund_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderReturnId != null">
+        #{orderReturnId,jdbcType=BIGINT},
+      </if>
+      <if test="refund != null">
+        #{refund,jdbcType=DECIMAL},
+      </if>
+      <if test="refundSn != null">
+        #{refundSn,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null">
+        #{refundStatus,jdbcType=BOOLEAN},
+      </if>
+      <if test="refundChannel != null">
+        #{refundChannel,jdbcType=TINYINT},
+      </if>
+      <if test="refundContent != null">
+        #{refundContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.order.entity.RefundInfo">
+    <!--@mbg.generated-->
+    update oms_refund_info
+    <set>
+      <if test="orderReturnId != null">
+        order_return_id = #{orderReturnId,jdbcType=BIGINT},
+      </if>
+      <if test="refund != null">
+        refund = #{refund,jdbcType=DECIMAL},
+      </if>
+      <if test="refundSn != null">
+        refund_sn = #{refundSn,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null">
+        refund_status = #{refundStatus,jdbcType=BOOLEAN},
+      </if>
+      <if test="refundChannel != null">
+        refund_channel = #{refundChannel,jdbcType=TINYINT},
+      </if>
+      <if test="refundContent != null">
+        refund_content = #{refundContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.order.entity.RefundInfo">
+    <!--@mbg.generated-->
+    update oms_refund_info
+    set order_return_id = #{orderReturnId,jdbcType=BIGINT},
+      refund = #{refund,jdbcType=DECIMAL},
+      refund_sn = #{refundSn,jdbcType=VARCHAR},
+      refund_status = #{refundStatus,jdbcType=BOOLEAN},
+      refund_channel = #{refundChannel,jdbcType=TINYINT},
+      refund_content = #{refundContent,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

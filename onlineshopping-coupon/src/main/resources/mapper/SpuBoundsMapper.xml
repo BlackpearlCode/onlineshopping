@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.SpuBoundsMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.SpuBounds">
+    <!--@mbg.generated-->
+    <!--@Table sms_spu_bounds-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="grow_bounds" jdbcType="DECIMAL" property="growBounds" />
+    <result column="buy_bounds" jdbcType="DECIMAL" property="buyBounds" />
+    <result column="work" jdbcType="BOOLEAN" property="work" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, spu_id, grow_bounds, buy_bounds, `work`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_spu_bounds
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_spu_bounds
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SpuBounds" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_spu_bounds (spu_id, grow_bounds, buy_bounds, 
+      `work`)
+    values (#{spuId,jdbcType=BIGINT}, #{growBounds,jdbcType=DECIMAL}, #{buyBounds,jdbcType=DECIMAL}, 
+      #{work,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SpuBounds" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_spu_bounds
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="growBounds != null">
+        grow_bounds,
+      </if>
+      <if test="buyBounds != null">
+        buy_bounds,
+      </if>
+      <if test="work != null">
+        `work`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="growBounds != null">
+        #{growBounds,jdbcType=DECIMAL},
+      </if>
+      <if test="buyBounds != null">
+        #{buyBounds,jdbcType=DECIMAL},
+      </if>
+      <if test="work != null">
+        #{work,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.SpuBounds">
+    <!--@mbg.generated-->
+    update sms_spu_bounds
+    <set>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="growBounds != null">
+        grow_bounds = #{growBounds,jdbcType=DECIMAL},
+      </if>
+      <if test="buyBounds != null">
+        buy_bounds = #{buyBounds,jdbcType=DECIMAL},
+      </if>
+      <if test="work != null">
+        `work` = #{work,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.SpuBounds">
+    <!--@mbg.generated-->
+    update sms_spu_bounds
+    set spu_id = #{spuId,jdbcType=BIGINT},
+      grow_bounds = #{growBounds,jdbcType=DECIMAL},
+      buy_bounds = #{buyBounds,jdbcType=DECIMAL},
+      `work` = #{work,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

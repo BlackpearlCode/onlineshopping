@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.CouponMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.Coupon">
+    <!--@mbg.generated-->
+    <!--@Table sms_coupon-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_type" jdbcType="BOOLEAN" property="couponType" />
+    <result column="coupon_img" jdbcType="VARCHAR" property="couponImg" />
+    <result column="coupon_name" jdbcType="VARCHAR" property="couponName" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="per_limit" jdbcType="INTEGER" property="perLimit" />
+    <result column="min_point" jdbcType="DECIMAL" property="minPoint" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="use_type" jdbcType="BOOLEAN" property="useType" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="publish_count" jdbcType="INTEGER" property="publishCount" />
+    <result column="use_count" jdbcType="INTEGER" property="useCount" />
+    <result column="receive_count" jdbcType="INTEGER" property="receiveCount" />
+    <result column="enable_start_time" jdbcType="TIMESTAMP" property="enableStartTime" />
+    <result column="enable_end_time" jdbcType="TIMESTAMP" property="enableEndTime" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="member_level" jdbcType="BOOLEAN" property="memberLevel" />
+    <result column="publish" jdbcType="BOOLEAN" property="publish" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, coupon_type, coupon_img, coupon_name, num, amount, per_limit, min_point, start_time, 
+    end_time, use_type, note, publish_count, use_count, receive_count, enable_start_time, 
+    enable_end_time, code, member_level, publish
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.Coupon" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_coupon (coupon_type, coupon_img, coupon_name, 
+      num, amount, per_limit, 
+      min_point, start_time, end_time, 
+      use_type, note, publish_count, 
+      use_count, receive_count, enable_start_time, 
+      enable_end_time, code, member_level, 
+      publish)
+    values (#{couponType,jdbcType=BOOLEAN}, #{couponImg,jdbcType=VARCHAR}, #{couponName,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{perLimit,jdbcType=INTEGER}, 
+      #{minPoint,jdbcType=DECIMAL}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{useType,jdbcType=BOOLEAN}, #{note,jdbcType=VARCHAR}, #{publishCount,jdbcType=INTEGER}, 
+      #{useCount,jdbcType=INTEGER}, #{receiveCount,jdbcType=INTEGER}, #{enableStartTime,jdbcType=TIMESTAMP}, 
+      #{enableEndTime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, #{memberLevel,jdbcType=BOOLEAN}, 
+      #{publish,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.Coupon" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_coupon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="couponType != null">
+        coupon_type,
+      </if>
+      <if test="couponImg != null">
+        coupon_img,
+      </if>
+      <if test="couponName != null">
+        coupon_name,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="perLimit != null">
+        per_limit,
+      </if>
+      <if test="minPoint != null">
+        min_point,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="useType != null">
+        use_type,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="publishCount != null">
+        publish_count,
+      </if>
+      <if test="useCount != null">
+        use_count,
+      </if>
+      <if test="receiveCount != null">
+        receive_count,
+      </if>
+      <if test="enableStartTime != null">
+        enable_start_time,
+      </if>
+      <if test="enableEndTime != null">
+        enable_end_time,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="memberLevel != null">
+        member_level,
+      </if>
+      <if test="publish != null">
+        publish,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="couponType != null">
+        #{couponType,jdbcType=BOOLEAN},
+      </if>
+      <if test="couponImg != null">
+        #{couponImg,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null">
+        #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="perLimit != null">
+        #{perLimit,jdbcType=INTEGER},
+      </if>
+      <if test="minPoint != null">
+        #{minPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useType != null">
+        #{useType,jdbcType=BOOLEAN},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="publishCount != null">
+        #{publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="useCount != null">
+        #{useCount,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCount != null">
+        #{receiveCount,jdbcType=INTEGER},
+      </if>
+      <if test="enableStartTime != null">
+        #{enableStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableEndTime != null">
+        #{enableEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLevel != null">
+        #{memberLevel,jdbcType=BOOLEAN},
+      </if>
+      <if test="publish != null">
+        #{publish,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.Coupon">
+    <!--@mbg.generated-->
+    update sms_coupon
+    <set>
+      <if test="couponType != null">
+        coupon_type = #{couponType,jdbcType=BOOLEAN},
+      </if>
+      <if test="couponImg != null">
+        coupon_img = #{couponImg,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null">
+        coupon_name = #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="perLimit != null">
+        per_limit = #{perLimit,jdbcType=INTEGER},
+      </if>
+      <if test="minPoint != null">
+        min_point = #{minPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useType != null">
+        use_type = #{useType,jdbcType=BOOLEAN},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="publishCount != null">
+        publish_count = #{publishCount,jdbcType=INTEGER},
+      </if>
+      <if test="useCount != null">
+        use_count = #{useCount,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCount != null">
+        receive_count = #{receiveCount,jdbcType=INTEGER},
+      </if>
+      <if test="enableStartTime != null">
+        enable_start_time = #{enableStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableEndTime != null">
+        enable_end_time = #{enableEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLevel != null">
+        member_level = #{memberLevel,jdbcType=BOOLEAN},
+      </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.Coupon">
+    <!--@mbg.generated-->
+    update sms_coupon
+    set coupon_type = #{couponType,jdbcType=BOOLEAN},
+      coupon_img = #{couponImg,jdbcType=VARCHAR},
+      coupon_name = #{couponName,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      per_limit = #{perLimit,jdbcType=INTEGER},
+      min_point = #{minPoint,jdbcType=DECIMAL},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      use_type = #{useType,jdbcType=BOOLEAN},
+      note = #{note,jdbcType=VARCHAR},
+      publish_count = #{publishCount,jdbcType=INTEGER},
+      use_count = #{useCount,jdbcType=INTEGER},
+      receive_count = #{receiveCount,jdbcType=INTEGER},
+      enable_start_time = #{enableStartTime,jdbcType=TIMESTAMP},
+      enable_end_time = #{enableEndTime,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      member_level = #{memberLevel,jdbcType=BOOLEAN},
+      publish = #{publish,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

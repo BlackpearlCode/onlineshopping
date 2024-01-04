@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.product.mapper.PmsAttrMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.product.entity.PmsAttr">
+    <!--@mbg.generated-->
+    <!--@Table pms_attr-->
+    <id column="attr_id" jdbcType="BIGINT" property="attrId" />
+    <result column="attr_name" jdbcType="CHAR" property="attrName" />
+    <result column="search_type" jdbcType="TINYINT" property="searchType" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="value_select" jdbcType="CHAR" property="valueSelect" />
+    <result column="value_type" jdbcType="BIGINT" property="valueType" />
+    <result column="attr_type" jdbcType="TINYINT" property="attrType" />
+    <result column="enable" jdbcType="BIGINT" property="enable" />
+    <result column="catelog_id" jdbcType="BIGINT" property="catelogId" />
+    <result column="show_desc" jdbcType="TINYINT" property="showDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    attr_id, attr_name, search_type, icon, value_select, value_type,attr_type, `enable`, catelog_id,
+    show_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_attr
+    where attr_id = #{attrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_attr
+    where attr_id = #{attrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="attr_id" keyProperty="attrId" parameterType="com.onlineshopping.product.entity.PmsAttr" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_attr (attr_name, search_type, icon, 
+      value_select,value_type, attr_type, `enable`,
+      catelog_id, show_desc)
+    values (#{attrName,jdbcType=CHAR}, #{searchType,jdbcType=TINYINT}, #{icon,jdbcType=VARCHAR}, 
+      #{valueSelect,jdbcType=CHAR}, #{valueType,jdbcType=BIGINT}, #{attrType,jdbcType=TINYINT}, #{enable,jdbcType=BIGINT},
+      #{catelogId,jdbcType=BIGINT}, #{showDesc,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="attr_id" keyProperty="attrId" parameterType="com.onlineshopping.product.entity.PmsAttr" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_attr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attrName != null">
+        attr_name,
+      </if>
+      <if test="searchType != null">
+        search_type,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="valueSelect != null">
+        value_select,
+      </if>
+      <if test="valueType != null">
+        value_type,
+      </if>
+      <if test="attrType != null">
+        attr_type,
+      </if>
+      <if test="enable != null">
+        `enable`,
+      </if>
+      <if test="catelogId != null">
+        catelog_id,
+      </if>
+      <if test="showDesc != null">
+        show_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attrName != null">
+        #{attrName,jdbcType=CHAR},
+      </if>
+      <if test="searchType != null">
+        #{searchType,jdbcType=TINYINT},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="valueSelect != null">
+        #{valueSelect,jdbcType=CHAR},
+      </if>
+      <if test="valueType !=null">
+        #{valueType,jdbcType=BIGINT}
+      </if>
+      <if test="attrType != null">
+        #{attrType,jdbcType=TINYINT},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=BIGINT},
+      </if>
+      <if test="catelogId != null">
+        #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="showDesc != null">
+        #{showDesc,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.product.entity.PmsAttr">
+    <!--@mbg.generated-->
+    update pms_attr
+    <set>
+      <if test="attrName != null">
+        attr_name = #{attrName,jdbcType=CHAR},
+      </if>
+      <if test="searchType != null">
+        search_type = #{searchType,jdbcType=TINYINT},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="valueSelect != null">
+        value_select = #{valueSelect,jdbcType=CHAR},
+      </if>
+      <if test="valueType != null">
+        value_type=#{valueType,jdbcType=BIGINT},
+      </if>
+      <if test="attrType != null">
+        attr_type = #{attrType,jdbcType=TINYINT},
+      </if>
+      <if test="enable != null">
+        `enable` = #{enable,jdbcType=BIGINT},
+      </if>
+      <if test="catelogId != null">
+        catelog_id = #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="showDesc != null">
+        show_desc = #{showDesc,jdbcType=TINYINT},
+      </if>
+    </set>
+    where attr_id = #{attrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.product.entity.PmsAttr">
+    <!--@mbg.generated-->
+    update pms_attr
+    set attr_name = #{attrName,jdbcType=CHAR},
+      search_type = #{searchType,jdbcType=TINYINT},
+      icon = #{icon,jdbcType=VARCHAR},
+      value_select = #{valueSelect,jdbcType=CHAR},
+      value_type=#{valueType,jdbcType=BIGINT},
+      attr_type = #{attrType,jdbcType=TINYINT},
+      `enable` = #{enable,jdbcType=BIGINT},
+      catelog_id = #{catelogId,jdbcType=BIGINT},
+      show_desc = #{showDesc,jdbcType=TINYINT}
+    where attr_id = #{attrId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByKey" resultMap="BaseResultMap">
+    select * from pms_attr where  attr_type =#{param2,jdbcType=VARCHAR} and (attr_id=#{param1,jdbcType=VARCHAR} or attr_name like '%' #{param1,jdbcType=VARCHAR} '%')
+
+
+    </select>
+
+  <select id="selectByAttrNameOrId" resultMap="BaseResultMap">
+    select * from pms_attr_group where catelog_id = #{param2}
+    <if test="param1 != 1">
+      and (attr_group_id = #{param1,jdbcType=VARCHAR} or attr_group_name like '%' #{param1,jdbcType=VARCHAR} '%')
+    </if>
+  </select>
+
+  <select id="selectByKeyAndCatelogId" resultMap="BaseResultMap">
+    select * from pms_attr where catelog_id = #{param1,jdbcType=BIGINT} and (attr_id=#{param2,jdbcType=VARCHAR} or attr_name like '%' #{param2,jdbcType=VARCHAR} '%')
+
+
+    <if test="param3 != null">
+      and attr_type =#{param3,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectBatchByAttrIds" resultMap="BaseResultMap">
+    select attr_id,attr_name,value_select from pms_attr where attr_id in
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+
+  </select>
+
+  <select id="selectRelation" resultMap="BaseResultMap">
+    select * from pms_attr where  catelog_id =#{param1,jdbcType=BIGINT}
+    <if test="param3 != null and  param3 != ''">
+      and (attr_id =#{param3,jdbcType=VARCHAR} or attr_name like '%' #{param3,jdbcType=VARCHAR} '%')
+    </if>
+    <if test="attrIdList != null and attrIdList.size() != 0">
+      and attr_id not in
+      <foreach collection="attrIdList" item="item" open="(" separator="," close=")" index="index" >
+        #{item}
+      </foreach>
+    </if>
+    and attr_type = #{param4}
+  </select>
+
+  <select id="selectByAttrType" resultMap="BaseResultMap">
+    select * from pms_attr where attr_type=#{param1} and (attr_id =#{param2,jdbcType=VARCHAR} or attr_name like '%' #{param2,jdbcType=VARCHAR} '%')
+  </select>
+
+  <delete id="batchDeleteByAttrId">
+    delete from pms_attr where attr_id in
+    <foreach collection="attrIds" item="item" open="(" separator="," close=")" index="index" >
+      #{item}
+    </foreach>
+    </delete>
+
+  <select id="selectAttrNameByAttrIdAndAttrType" resultMap="BaseResultMap">
+    select * from pms_attr where attr_id=#{param1,jdbcType=BIGINT} and attr_type=#{param2}
+  </select>
+
+  <select id="selectBySearchType" resultType="java.lang.Long">
+    select attr_id from pms_attr where search_type=#{type,jdbcType=BIGINT}
+    </select>
+  <resultMap id="spuItemAttrGroupVo" type="com.onlineshopping.product.vo.SpuItemAttrGroupVo">
+    <result property="groupName" column="attr_group_name"></result>
+    <collection property="attrs" ofType="com.onlineshopping.product.vo.Attr">
+      <result column="attr_id" property="attrId"></result>
+      <result column="attr_name" property="attrName"></result>
+      <result column="attr_value" property="attrValue"></result>
+    </collection>
+  </resultMap>
+
+  <select id="getAttrGroupWithAttrsBySpuId" resultMap="spuItemAttrGroupVo">
+    SELECT
+<!--      pms_product_attr_value.spu_id,-->
+      pms_attr_group.attr_group_name ,
+<!--      pms_attr_attrgroup_relation.attr_group_id,-->
+      pms_attr.attr_id ,
+      pms_attr.attr_name ,
+      pms_product_attr_value.attr_value
+    FROM
+      pms_attr_group
+        LEFT JOIN pms_attr_attrgroup_relation  ON pms_attr_group.attr_group_id =pms_attr_attrgroup_relation.attr_group_id
+        LEFT JOIN pms_attr ON pms_attr.attr_id = pms_attr_attrgroup_relation.attr_id
+        LEFT JOIN pms_product_attr_value ON pms_product_attr_value.attr_id = pms_attr.attr_id
+    WHERE
+      pms_attr.catelog_id = #{catalogId,jdbcType=BIGINT}
+      AND pms_product_attr_value.spu_id = #{spuId,jdbcType=BIGINT}
+    </select>
+</mapper>

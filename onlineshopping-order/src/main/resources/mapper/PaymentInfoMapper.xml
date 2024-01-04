@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.order.mapper.PaymentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.order.entity.PaymentInfo">
+    <!--@mbg.generated-->
+    <!--@Table oms_payment_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_sn" jdbcType="CHAR" property="orderSn" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="alipay_trade_no" jdbcType="VARCHAR" property="alipayTradeNo" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="payment_status" jdbcType="VARCHAR" property="paymentStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+    <result column="callback_content" jdbcType="VARCHAR" property="callbackContent" />
+    <result column="callback_time" jdbcType="TIMESTAMP" property="callbackTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, order_sn, order_id, alipay_trade_no, total_amount, subject, payment_status, create_time, 
+    confirm_time, callback_content, callback_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from oms_payment_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from oms_payment_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.PaymentInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_payment_info (order_sn, order_id, alipay_trade_no, 
+      total_amount, subject, payment_status, 
+      create_time, confirm_time, callback_content, 
+      callback_time)
+    values (#{orderSn,jdbcType=CHAR}, #{orderId,jdbcType=BIGINT}, #{alipayTradeNo,jdbcType=VARCHAR}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{subject,jdbcType=VARCHAR}, #{paymentStatus,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}, #{callbackContent,jdbcType=VARCHAR}, 
+      #{callbackTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.PaymentInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_payment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderSn != null">
+        order_sn,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="alipayTradeNo != null">
+        alipay_trade_no,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="paymentStatus != null">
+        payment_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="confirmTime != null">
+        confirm_time,
+      </if>
+      <if test="callbackContent != null">
+        callback_content,
+      </if>
+      <if test="callbackTime != null">
+        callback_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="alipayTradeNo != null">
+        #{alipayTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentStatus != null">
+        #{paymentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null">
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="callbackContent != null">
+        #{callbackContent,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackTime != null">
+        #{callbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.order.entity.PaymentInfo">
+    <!--@mbg.generated-->
+    update oms_payment_info
+    <set>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="alipayTradeNo != null">
+        alipay_trade_no = #{alipayTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentStatus != null">
+        payment_status = #{paymentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null">
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="callbackContent != null">
+        callback_content = #{callbackContent,jdbcType=VARCHAR},
+      </if>
+      <if test="callbackTime != null">
+        callback_time = #{callbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.order.entity.PaymentInfo">
+    <!--@mbg.generated-->
+    update oms_payment_info
+    set order_sn = #{orderSn,jdbcType=CHAR},
+      order_id = #{orderId,jdbcType=BIGINT},
+      alipay_trade_no = #{alipayTradeNo,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      subject = #{subject,jdbcType=VARCHAR},
+      payment_status = #{paymentStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      callback_content = #{callbackContent,jdbcType=VARCHAR},
+      callback_time = #{callbackTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

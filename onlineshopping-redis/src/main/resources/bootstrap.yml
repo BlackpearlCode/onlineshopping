@@ -1,0 +1,13 @@
+spring:
+    cloud:
+        nacos:
+            config:
+                server-addr: 47.99.142.201:8848
+                namespace: ea6d210a-b8df-4adf-b227-7a5387855719
+                group: DEFAULT_GROUP
+                file-extension: yml
+                name: redis
+                enabled: true
+            discovery:
+                server-addr: 47.99.142.201:8848
+

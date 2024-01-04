@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.order.mapper.OrderReturnApplyMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.order.entity.OrderReturnApply">
+    <!--@mbg.generated-->
+    <!--@Table oms_order_return_apply-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="order_sn" jdbcType="CHAR" property="orderSn" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="member_username" jdbcType="VARCHAR" property="memberUsername" />
+    <result column="return_amount" jdbcType="DECIMAL" property="returnAmount" />
+    <result column="return_name" jdbcType="VARCHAR" property="returnName" />
+    <result column="return_phone" jdbcType="VARCHAR" property="returnPhone" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime" />
+    <result column="sku_img" jdbcType="VARCHAR" property="skuImg" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_brand" jdbcType="VARCHAR" property="skuBrand" />
+    <result column="sku_attrs_vals" jdbcType="VARCHAR" property="skuAttrsVals" />
+    <result column="sku_count" jdbcType="INTEGER" property="skuCount" />
+    <result column="sku_price" jdbcType="DECIMAL" property="skuPrice" />
+    <result column="sku_real_price" jdbcType="DECIMAL" property="skuRealPrice" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="description述" jdbcType="VARCHAR" property="description述" />
+    <result column="desc_pics" jdbcType="VARCHAR" property="descPics" />
+    <result column="handle_note" jdbcType="VARCHAR" property="handleNote" />
+    <result column="handle_man" jdbcType="VARCHAR" property="handleMan" />
+    <result column="receive_man" jdbcType="VARCHAR" property="receiveMan" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="receive_note" jdbcType="VARCHAR" property="receiveNote" />
+    <result column="receive_phone" jdbcType="VARCHAR" property="receivePhone" />
+    <result column="company_address" jdbcType="VARCHAR" property="companyAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, order_id, sku_id, order_sn, create_time, member_username, return_amount, return_name, 
+    return_phone, `status`, handle_time, sku_img, sku_name, sku_brand, sku_attrs_vals, 
+    sku_count, sku_price, sku_real_price, reason, description述, desc_pics, handle_note, 
+    handle_man, receive_man, receive_time, receive_note, receive_phone, company_address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from oms_order_return_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from oms_order_return_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.OrderReturnApply" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_order_return_apply (order_id, sku_id, order_sn, 
+      create_time, member_username, return_amount, 
+      return_name, return_phone, `status`, 
+      handle_time, sku_img, sku_name, 
+      sku_brand, sku_attrs_vals, sku_count, 
+      sku_price, sku_real_price, reason, 
+      description述, desc_pics, handle_note, 
+      handle_man, receive_man, receive_time, 
+      receive_note, receive_phone, company_address
+      )
+    values (#{orderId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{orderSn,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{memberUsername,jdbcType=VARCHAR}, #{returnAmount,jdbcType=DECIMAL}, 
+      #{returnName,jdbcType=VARCHAR}, #{returnPhone,jdbcType=VARCHAR}, #{status,jdbcType=BOOLEAN}, 
+      #{handleTime,jdbcType=TIMESTAMP}, #{skuImg,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, 
+      #{skuBrand,jdbcType=VARCHAR}, #{skuAttrsVals,jdbcType=VARCHAR}, #{skuCount,jdbcType=INTEGER}, 
+      #{skuPrice,jdbcType=DECIMAL}, #{skuRealPrice,jdbcType=DECIMAL}, #{reason,jdbcType=VARCHAR}, 
+      #{description述,jdbcType=VARCHAR}, #{descPics,jdbcType=VARCHAR}, #{handleNote,jdbcType=VARCHAR}, 
+      #{handleMan,jdbcType=VARCHAR}, #{receiveMan,jdbcType=VARCHAR}, #{receiveTime,jdbcType=TIMESTAMP}, 
+      #{receiveNote,jdbcType=VARCHAR}, #{receivePhone,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.OrderReturnApply" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_order_return_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="orderSn != null">
+        order_sn,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="memberUsername != null">
+        member_username,
+      </if>
+      <if test="returnAmount != null">
+        return_amount,
+      </if>
+      <if test="returnName != null">
+        return_name,
+      </if>
+      <if test="returnPhone != null">
+        return_phone,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="handleTime != null">
+        handle_time,
+      </if>
+      <if test="skuImg != null">
+        sku_img,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuBrand != null">
+        sku_brand,
+      </if>
+      <if test="skuAttrsVals != null">
+        sku_attrs_vals,
+      </if>
+      <if test="skuCount != null">
+        sku_count,
+      </if>
+      <if test="skuPrice != null">
+        sku_price,
+      </if>
+      <if test="skuRealPrice != null">
+        sku_real_price,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="description述 != null">
+        description述,
+      </if>
+      <if test="descPics != null">
+        desc_pics,
+      </if>
+      <if test="handleNote != null">
+        handle_note,
+      </if>
+      <if test="handleMan != null">
+        handle_man,
+      </if>
+      <if test="receiveMan != null">
+        receive_man,
+      </if>
+      <if test="receiveTime != null">
+        receive_time,
+      </if>
+      <if test="receiveNote != null">
+        receive_note,
+      </if>
+      <if test="receivePhone != null">
+        receive_phone,
+      </if>
+      <if test="companyAddress != null">
+        company_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberUsername != null">
+        #{memberUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="returnAmount != null">
+        #{returnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="returnName != null">
+        #{returnName,jdbcType=VARCHAR},
+      </if>
+      <if test="returnPhone != null">
+        #{returnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="handleTime != null">
+        #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="skuImg != null">
+        #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBrand != null">
+        #{skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="skuAttrsVals != null">
+        #{skuAttrsVals,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCount != null">
+        #{skuCount,jdbcType=INTEGER},
+      </if>
+      <if test="skuPrice != null">
+        #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="skuRealPrice != null">
+        #{skuRealPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="description述 != null">
+        #{description述,jdbcType=VARCHAR},
+      </if>
+      <if test="descPics != null">
+        #{descPics,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNote != null">
+        #{handleNote,jdbcType=VARCHAR},
+      </if>
+      <if test="handleMan != null">
+        #{handleMan,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMan != null">
+        #{receiveMan,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveNote != null">
+        #{receiveNote,jdbcType=VARCHAR},
+      </if>
+      <if test="receivePhone != null">
+        #{receivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.order.entity.OrderReturnApply">
+    <!--@mbg.generated-->
+    update oms_order_return_apply
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberUsername != null">
+        member_username = #{memberUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="returnAmount != null">
+        return_amount = #{returnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="returnName != null">
+        return_name = #{returnName,jdbcType=VARCHAR},
+      </if>
+      <if test="returnPhone != null">
+        return_phone = #{returnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="handleTime != null">
+        handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="skuImg != null">
+        sku_img = #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBrand != null">
+        sku_brand = #{skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="skuAttrsVals != null">
+        sku_attrs_vals = #{skuAttrsVals,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCount != null">
+        sku_count = #{skuCount,jdbcType=INTEGER},
+      </if>
+      <if test="skuPrice != null">
+        sku_price = #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="skuRealPrice != null">
+        sku_real_price = #{skuRealPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="description述 != null">
+        description述 = #{description述,jdbcType=VARCHAR},
+      </if>
+      <if test="descPics != null">
+        desc_pics = #{descPics,jdbcType=VARCHAR},
+      </if>
+      <if test="handleNote != null">
+        handle_note = #{handleNote,jdbcType=VARCHAR},
+      </if>
+      <if test="handleMan != null">
+        handle_man = #{handleMan,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMan != null">
+        receive_man = #{receiveMan,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null">
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveNote != null">
+        receive_note = #{receiveNote,jdbcType=VARCHAR},
+      </if>
+      <if test="receivePhone != null">
+        receive_phone = #{receivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.order.entity.OrderReturnApply">
+    <!--@mbg.generated-->
+    update oms_order_return_apply
+    set order_id = #{orderId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      order_sn = #{orderSn,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      member_username = #{memberUsername,jdbcType=VARCHAR},
+      return_amount = #{returnAmount,jdbcType=DECIMAL},
+      return_name = #{returnName,jdbcType=VARCHAR},
+      return_phone = #{returnPhone,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=BOOLEAN},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      sku_img = #{skuImg,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_brand = #{skuBrand,jdbcType=VARCHAR},
+      sku_attrs_vals = #{skuAttrsVals,jdbcType=VARCHAR},
+      sku_count = #{skuCount,jdbcType=INTEGER},
+      sku_price = #{skuPrice,jdbcType=DECIMAL},
+      sku_real_price = #{skuRealPrice,jdbcType=DECIMAL},
+      reason = #{reason,jdbcType=VARCHAR},
+      description述 = #{description述,jdbcType=VARCHAR},
+      desc_pics = #{descPics,jdbcType=VARCHAR},
+      handle_note = #{handleNote,jdbcType=VARCHAR},
+      handle_man = #{handleMan,jdbcType=VARCHAR},
+      receive_man = #{receiveMan,jdbcType=VARCHAR},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      receive_note = #{receiveNote,jdbcType=VARCHAR},
+      receive_phone = #{receivePhone,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

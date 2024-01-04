@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.product.mapper.PmsAttrGroupMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.product.entity.PmsAttrGroup">
+    <!--@mbg.generated-->
+    <!--@Table pms_attr_group-->
+    <id column="attr_group_id" jdbcType="BIGINT" property="attrGroupId" />
+    <result column="attr_group_name" jdbcType="CHAR" property="attrGroupName" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="descript" jdbcType="VARCHAR" property="descript" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="catelog_id" jdbcType="BIGINT" property="catelogId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    attr_group_id, attr_group_name, sort, descript, icon, catelog_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_attr_group
+    where attr_group_id = #{attrGroupId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_attr_group
+    where attr_group_id = #{attrGroupId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="attr_group_id" keyProperty="attrGroupId" parameterType="com.onlineshopping.product.entity.PmsAttrGroup" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_attr_group (attr_group_name, sort, descript, 
+      icon, catelog_id)
+    values (#{attrGroupName,jdbcType=CHAR}, #{sort,jdbcType=INTEGER}, #{descript,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{catelogId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="attr_group_id" keyProperty="attrGroupId" parameterType="com.onlineshopping.product.entity.PmsAttrGroup" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_attr_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attrGroupName != null">
+        attr_group_name,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="descript != null">
+        descript,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="catelogId != null">
+        catelog_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attrGroupName != null">
+        #{attrGroupName,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="descript != null">
+        #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null">
+        #{catelogId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.product.entity.PmsAttrGroup">
+    <!--@mbg.generated-->
+    update pms_attr_group
+    <set>
+      <if test="attrGroupName != null">
+        attr_group_name = #{attrGroupName,jdbcType=CHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="descript != null">
+        descript = #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null">
+        catelog_id = #{catelogId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where attr_group_id = #{attrGroupId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.product.entity.PmsAttrGroup">
+    <!--@mbg.generated-->
+    update pms_attr_group
+    set attr_group_name = #{attrGroupName,jdbcType=CHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      descript = #{descript,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      catelog_id = #{catelogId,jdbcType=BIGINT}
+    where attr_group_id = #{attrGroupId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from pms_attr_group where 1=1
+    <if test="key != null and key != ''">
+      and (attr_group_id = #{key,jdbcType=VARCHAR} or attr_group_name like '%' #{key,jdbcType=VARCHAR} '%')
+    </if>
+    </select>
+
+  <select id="selectByAttrGroupId" resultMap="BaseResultMap">
+    select * from pms_attr_group where attr_group_id = #{attrGroupId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByAttrGroupNameOrId" resultMap="BaseResultMap">
+    select * from pms_attr_group where catelog_id = #{param2}
+    <if test="param1 != null">
+      and (attr_group_id = #{param1,jdbcType=VARCHAR} or attr_group_name like '%' #{param1,jdbcType=VARCHAR} '%')
+    </if>
+  </select>
+
+  <delete id="batchDelete" parameterType = "java.util.List">
+    delete from pms_attr_group
+    where attr_group_id in
+    <foreach collection="list" item="item" open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="selectByCatelogId" resultMap="BaseResultMap">
+    select * from pms_attr_group
+    <if test="_parameter != null">
+      where  catelog_id = #{catelogId,jdbcType=BIGINT}
+    </if>
+
+
+    </select>
+</mapper>

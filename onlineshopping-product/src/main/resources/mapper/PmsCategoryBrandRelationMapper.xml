@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.product.mapper.PmsCategoryBrandRelationMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.product.entity.PmsCategoryBrandRelation">
+    <!--@mbg.generated-->
+    <!--@Table pms_category_brand_relation-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="catelog_id" jdbcType="BIGINT" property="catelogId" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="catelog_name" jdbcType="VARCHAR" property="catelogName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, brand_id, catelog_id, brand_name, catelog_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_category_brand_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_category_brand_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.product.entity.PmsCategoryBrandRelation" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_category_brand_relation (brand_id, catelog_id, brand_name, 
+      catelog_name)
+    values (#{brandId,jdbcType=BIGINT}, #{catelogId,jdbcType=BIGINT}, #{brandName,jdbcType=VARCHAR}, 
+      #{catelogName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.product.entity.PmsCategoryBrandRelation" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_category_brand_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="catelogId != null">
+        catelog_id,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="catelogName != null">
+        catelog_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="catelogId != null">
+        #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogName != null">
+        #{catelogName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.product.entity.PmsCategoryBrandRelation">
+    <!--@mbg.generated-->
+    update pms_category_brand_relation
+    <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="catelogId != null">
+        catelog_id = #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="brandName != null">
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogName != null">
+        catelog_name = #{catelogName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.product.entity.PmsCategoryBrandRelation">
+    <!--@mbg.generated-->
+    update pms_category_brand_relation
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      catelog_id = #{catelogId,jdbcType=BIGINT},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      catelog_name = #{catelogName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByBradnId" resultMap="BaseResultMap">
+    select * from pms_category_brand_relation where brand_id=#{brandId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="batchDelete" parameterType = "java.util.List">
+    delete from pms_category_brand_relation
+    where id in
+    <foreach collection="list" item="item" open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </delete>
+
+  <update id="updateByBrandId">
+    update pms_category_brand_relation set brand_name = #{param2,jdbcType=VARCHAR} where brand_id=#{param1,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByCatelogId">
+    update pms_category_brand_relation set catelog_name = #{param2,jdbcType=VARCHAR} where catelog_id=#{param1,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteByCatelogIds" parameterType = "java.util.List">
+    delete from pms_category_brand_relation
+    where catelog_id in
+    <foreach collection="list" item="item" open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </delete>
+
+  <delete id="deleteByBrands" parameterType = "java.util.List">
+    delete from pms_category_brand_relation
+    where brand_id in
+    <foreach collection="list" item="item" open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="getBrandsByCatelogId" resultMap="BaseResultMap">
+    select brand_id,brand_name from pms_category_brand_relation where catelog_id =#{catId,jdbcType=BIGINT}
+
+    </select>
+</mapper>

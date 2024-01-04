@@ -1,0 +1,13 @@
+spring:
+    cloud:
+        nacos:
+            config:
+                server-addr: 47.99.142.201:8848
+                namespace: 7c0e57f8-c3c3-4176-981e-a1ff28663760
+                group: DEFAULT_GROUP
+                file-extension: yml
+                name: config
+                enabled: true
+            discovery:
+                server-addr: 47.99.142.201:8848
+

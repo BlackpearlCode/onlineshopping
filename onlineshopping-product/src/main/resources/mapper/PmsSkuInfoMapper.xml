@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.product.mapper.PmsSkuInfoMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.product.entity.PmsSkuInfo">
+    <!--@mbg.generated-->
+    <!--@Table pms_sku_info-->
+    <id column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_desc" jdbcType="VARCHAR" property="skuDesc" />
+    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="sku_default_img" jdbcType="VARCHAR" property="skuDefaultImg" />
+    <result column="sku_title" jdbcType="VARCHAR" property="skuTitle" />
+    <result column="sku_subtitle" jdbcType="VARCHAR" property="skuSubtitle" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="sale_count" jdbcType="BIGINT" property="saleCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sku_id, spu_id, sku_name, sku_desc, catalog_id, brand_id, sku_default_img, sku_title, 
+    sku_subtitle, price, sale_count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_sku_info
+    where sku_id = #{skuId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_sku_info
+    where sku_id = #{skuId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="sku_id" keyProperty="skuId" parameterType="com.onlineshopping.product.entity.PmsSkuInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_sku_info (spu_id, sku_name, sku_desc, 
+      catalog_id, brand_id, sku_default_img, 
+      sku_title, sku_subtitle, price, 
+      sale_count)
+    values (#{spuId,jdbcType=BIGINT}, #{skuName,jdbcType=VARCHAR}, #{skuDesc,jdbcType=VARCHAR}, 
+      #{catalogId,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{skuDefaultImg,jdbcType=VARCHAR}, 
+      #{skuTitle,jdbcType=VARCHAR}, #{skuSubtitle,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{saleCount,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="sku_id" keyProperty="skuId" parameterType="com.onlineshopping.product.entity.PmsSkuInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_sku_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuDesc != null">
+        sku_desc,
+      </if>
+      <if test="catalogId != null">
+        catalog_id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="skuDefaultImg != null">
+        sku_default_img,
+      </if>
+      <if test="skuTitle != null">
+        sku_title,
+      </if>
+      <if test="skuSubtitle != null">
+        sku_subtitle,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="saleCount != null">
+        sale_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuDesc != null">
+        #{skuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogId != null">
+        #{catalogId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="skuDefaultImg != null">
+        #{skuDefaultImg,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTitle != null">
+        #{skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSubtitle != null">
+        #{skuSubtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCount != null">
+        #{saleCount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.product.entity.PmsSkuInfo">
+    <!--@mbg.generated-->
+    update pms_sku_info
+    <set>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuDesc != null">
+        sku_desc = #{skuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogId != null">
+        catalog_id = #{catalogId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="skuDefaultImg != null">
+        sku_default_img = #{skuDefaultImg,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTitle != null">
+        sku_title = #{skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSubtitle != null">
+        sku_subtitle = #{skuSubtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCount != null">
+        sale_count = #{saleCount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where sku_id = #{skuId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.product.entity.PmsSkuInfo">
+    <!--@mbg.generated-->
+    update pms_sku_info
+    set spu_id = #{spuId,jdbcType=BIGINT},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_desc = #{skuDesc,jdbcType=VARCHAR},
+      catalog_id = #{catalogId,jdbcType=BIGINT},
+      brand_id = #{brandId,jdbcType=BIGINT},
+      sku_default_img = #{skuDefaultImg,jdbcType=VARCHAR},
+      sku_title = #{skuTitle,jdbcType=VARCHAR},
+      sku_subtitle = #{skuSubtitle,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      sale_count = #{saleCount,jdbcType=BIGINT}
+    where sku_id = #{skuId,jdbcType=BIGINT}
+  </update>
+
+  <select id="getInfo" resultMap="BaseResultMap">
+    select * from pms_sku_info where 1=1
+    <if test="params.key !=null and params.key !=''">
+      and (sku_id =#{params.key} or sku_name=#{params.key} )
+    </if>
+    <if test="params.catelogId !=null and params.catelogId !=0" >{
+      and catalog_id=#{params.catelogId}
+    </if>
+    <if test="params.brandId !=null and params.brandId !=0">
+      and brand_id=#{params.brandId}
+    </if>
+    <if test="params.min !=null and params.min !=0">
+      and price>= #{params.min}
+    </if>
+    <if test="params.max != null and params.max !=0">
+      and price &lt;= #{params.max}
+    </if>
+    </select>
+
+  <select id="selectBySpuId" resultMap="BaseResultMap">
+    select * from pms_sku_info where spu_id=#{spuId,jdbcType=BIGINT}
+  </select>
+
+  <select id="getSkuInfoBySkuId" resultMap="BaseResultMap">
+    select * from pms_sku_info where sku_id = #{skuId,jdbcType=BIGINT}
+    </select>
+</mapper>

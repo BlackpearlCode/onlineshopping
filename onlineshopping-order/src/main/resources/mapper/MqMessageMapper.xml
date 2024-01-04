@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.order.mapper.MqMessageMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.order.entity.MqMessage">
+    <!--@mbg.generated-->
+    <!--@Table mq_message-->
+    <id column="message_id" jdbcType="CHAR" property="messageId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="to_exchane" jdbcType="VARCHAR" property="toExchane" />
+    <result column="routing_key" jdbcType="VARCHAR" property="routingKey" />
+    <result column="class_type" jdbcType="VARCHAR" property="classType" />
+    <result column="message_status" jdbcType="INTEGER" property="messageStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    message_id, content, to_exchane, routing_key, class_type, message_status, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mq_message
+    where message_id = #{messageId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from mq_message
+    where message_id = #{messageId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.onlineshopping.order.entity.MqMessage">
+    <!--@mbg.generated-->
+    insert into mq_message (message_id, content, to_exchane, 
+      routing_key, class_type, message_status, 
+      create_time, update_time)
+    values (#{messageId,jdbcType=CHAR}, #{content,jdbcType=LONGVARCHAR}, #{toExchane,jdbcType=VARCHAR}, 
+      #{routingKey,jdbcType=VARCHAR}, #{classType,jdbcType=VARCHAR}, #{messageStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onlineshopping.order.entity.MqMessage">
+    <!--@mbg.generated-->
+    insert into mq_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="toExchane != null">
+        to_exchane,
+      </if>
+      <if test="routingKey != null">
+        routing_key,
+      </if>
+      <if test="classType != null">
+        class_type,
+      </if>
+      <if test="messageStatus != null">
+        message_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=CHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="toExchane != null">
+        #{toExchane,jdbcType=VARCHAR},
+      </if>
+      <if test="routingKey != null">
+        #{routingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="classType != null">
+        #{classType,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null">
+        #{messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.order.entity.MqMessage">
+    <!--@mbg.generated-->
+    update mq_message
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="toExchane != null">
+        to_exchane = #{toExchane,jdbcType=VARCHAR},
+      </if>
+      <if test="routingKey != null">
+        routing_key = #{routingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="classType != null">
+        class_type = #{classType,jdbcType=VARCHAR},
+      </if>
+      <if test="messageStatus != null">
+        message_status = #{messageStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.order.entity.MqMessage">
+    <!--@mbg.generated-->
+    update mq_message
+    set content = #{content,jdbcType=LONGVARCHAR},
+      to_exchane = #{toExchane,jdbcType=VARCHAR},
+      routing_key = #{routingKey,jdbcType=VARCHAR},
+      class_type = #{classType,jdbcType=VARCHAR},
+      message_status = #{messageStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where message_id = #{messageId,jdbcType=CHAR}
+  </update>
+</mapper>

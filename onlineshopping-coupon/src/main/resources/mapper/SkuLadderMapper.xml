@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.coupon.mapper.SkuLadderMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.coupon.entity.SkuLadder">
+    <!--@mbg.generated-->
+    <!--@Table sms_sku_ladder-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="full_count" jdbcType="INTEGER" property="fullCount" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="add_other" jdbcType="BOOLEAN" property="addOther" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, sku_id, full_count, discount, price, add_other
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sms_sku_ladder
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sms_sku_ladder
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SkuLadder" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_sku_ladder (sku_id, full_count, discount, 
+      price, add_other)
+    values (#{skuId,jdbcType=BIGINT}, #{fullCount,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, 
+      #{price,jdbcType=DECIMAL}, #{addOther,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.coupon.entity.SkuLadder" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sms_sku_ladder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="fullCount != null">
+        full_count,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="addOther != null">
+        add_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="fullCount != null">
+        #{fullCount,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="addOther != null">
+        #{addOther,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.coupon.entity.SkuLadder">
+    <!--@mbg.generated-->
+    update sms_sku_ladder
+    <set>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="fullCount != null">
+        full_count = #{fullCount,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="addOther != null">
+        add_other = #{addOther,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.coupon.entity.SkuLadder">
+    <!--@mbg.generated-->
+    update sms_sku_ladder
+    set sku_id = #{skuId,jdbcType=BIGINT},
+      full_count = #{fullCount,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      add_other = #{addOther,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

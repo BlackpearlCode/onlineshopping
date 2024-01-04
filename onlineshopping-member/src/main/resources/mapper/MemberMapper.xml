@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.member.mapper.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.member.entity.Member">
+    <!--@mbg.generated-->
+    <!--@Table ums_member-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="level_id" jdbcType="BIGINT" property="levelId" />
+    <result column="username" jdbcType="CHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="header" jdbcType="VARCHAR" property="header" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="birth" jdbcType="DATE" property="birth" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="source_type" jdbcType="TINYINT" property="sourceType" />
+    <result column="integration" jdbcType="INTEGER" property="integration" />
+    <result column="growth" jdbcType="INTEGER" property="growth" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="social_uid" jdbcType="VARCHAR" property="socialUid" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="expires_in" jdbcType="BIGINT" property="expiresIn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, level_id, username, `password`, nickname, mobile, email, `header`, gender, birth, 
+    city, job, sign, source_type, integration, growth, `status`, create_time, social_uid,
+    access_token, expires_in
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from ums_member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from ums_member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.member.entity.Member" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ums_member (level_id, username, `password`, 
+      nickname, mobile, email, 
+      `header`, gender, birth, 
+      city, job, sign, source_type, 
+      integration, growth, `status`, 
+      create_time)
+    values (#{levelId,jdbcType=BIGINT}, #{username,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{header,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, #{birth,jdbcType=DATE}, 
+      #{city,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{sourceType,jdbcType=TINYINT}, 
+      #{integration,jdbcType=INTEGER}, #{growth,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert   id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.member.entity.Member" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into ums_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="levelId != null">
+        level_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="header != null">
+        `header`,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="integration != null">
+        integration,
+      </if>
+      <if test="growth != null">
+        growth,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="socialUid!= null">
+        social_uid,
+      </if>
+      <if test="accessToken!= null">
+        access_token,
+      </if>
+      <if test="expiresIn!= null">
+        expires_in,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="levelId != null">
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null">
+        #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=DATE},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=TINYINT},
+      </if>
+      <if test="integration != null">
+        #{integration,jdbcType=INTEGER},
+      </if>
+      <if test="growth != null">
+        #{growth,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="socialUid != null and socialUid != '' != null">
+        #{socialUid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null and accessToken != '' != null">
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expiresIn != null and expiresIn != '' != null">
+        #{expiresIn,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.member.entity.Member">
+    <!--@mbg.generated-->
+    update ums_member
+    <set>
+      <if test="levelId != null">
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null">
+        `header` = #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=DATE},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=TINYINT},
+      </if>
+      <if test="integration != null">
+        integration = #{integration,jdbcType=INTEGER},
+      </if>
+      <if test="growth != null">
+        growth = #{growth,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="socialUid != null and socialUid != '' != null">
+        social_uid = #{socialUid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null and accessToken != '' != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expiresIn != null and expiresIn != '' != null">
+        expires_in = #{expiresIn},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.member.entity.Member">
+    <!--@mbg.generated-->
+    update ums_member
+    set level_id = #{levelId,jdbcType=BIGINT},
+      username = #{username,jdbcType=CHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      `header` = #{header,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      birth = #{birth,jdbcType=DATE},
+      city = #{city,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=TINYINT},
+      integration = #{integration,jdbcType=INTEGER},
+      growth = #{growth,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectPhoneISExist" resultType="java.lang.Integer">
+    select count(*) from ums_member where mobile=#{mobile,jdbcType=VARCHAR}
+  </select>
+
+  <select id="seleatUsernameISExist" resultType="java.lang.Integer">
+    select count(*) from ums_member where username=#{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectUsernameOrPhone" resultMap="BaseResultMap">
+    select * from ums_member where username=#{vo.loginacct,jdbcType=VARCHAR} or mobile=#{vo.loginacct,jdbcType=VARCHAR}
+    </select>
+
+  <select id="selectByMemberId" resultMap="BaseResultMap">
+    select * from ums_member where id=#{memberId} or social_uid=#{memberId}
+  </select>
+
+  <select id="selectBySocialUid" resultMap="BaseResultMap">
+    select * from ums_member where social_uid=#{socialUid}
+  </select>
+</mapper>

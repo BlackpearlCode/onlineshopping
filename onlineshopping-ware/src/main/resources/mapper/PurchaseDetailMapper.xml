@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.ware.mapper.PurchaseDetailMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.ware.entity.PurchaseDetail">
+    <!--@mbg.generated-->
+    <!--@Table wms_purchase_detail-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="purchase_id" jdbcType="BIGINT" property="purchaseId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="sku_num" jdbcType="INTEGER" property="skuNum" />
+    <result column="sku_price" jdbcType="DECIMAL" property="skuPrice" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, purchase_id, sku_id, sku_num, sku_price, ware_id, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from wms_purchase_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from wms_purchase_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.ware.entity.PurchaseDetail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wms_purchase_detail (purchase_id, sku_id, sku_num, 
+      sku_price, ware_id, `status`
+      )
+    values (#{purchaseId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, #{skuNum,jdbcType=INTEGER}, 
+      #{skuPrice,jdbcType=DECIMAL}, #{wareId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.ware.entity.PurchaseDetail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wms_purchase_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="purchaseId != null">
+        purchase_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuNum != null">
+        sku_num,
+      </if>
+      <if test="skuPrice != null">
+        sku_price,
+      </if>
+      <if test="wareId != null">
+        ware_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="purchaseId != null">
+        #{purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuNum != null">
+        #{skuNum,jdbcType=INTEGER},
+      </if>
+      <if test="skuPrice != null">
+        #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wareId != null">
+        #{wareId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.ware.entity.PurchaseDetail">
+    <!--@mbg.generated-->
+    update wms_purchase_detail
+    <set>
+      <if test="purchaseId != null">
+        purchase_id = #{purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuNum != null">
+        sku_num = #{skuNum,jdbcType=INTEGER},
+      </if>
+      <if test="skuPrice != null">
+        sku_price = #{skuPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="wareId != null">
+        ware_id = #{wareId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.ware.entity.PurchaseDetail">
+    <!--@mbg.generated-->
+    update wms_purchase_detail
+    set purchase_id = #{purchaseId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      sku_num = #{skuNum,jdbcType=INTEGER},
+      sku_price = #{skuPrice,jdbcType=DECIMAL},
+      ware_id = #{wareId,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    select * from wms_purchase_detail where 1=1
+    <if test="params.key !=null and params.key !=''">
+      and (sku_id=#{params.key} or purchase_id=#{params.key})
+    </if>
+    <if test="params.status !=null and params.status !=''">
+      and status=#{params.status}
+    </if>
+    <if test="params.wareId !=null and params.wareId !=''">
+      and ware_id=#{params.wareId}
+    </if>
+    </select>
+
+  <update id="batchUpdate" >
+    <foreach collection="purchaseDetailList" item="purchaseDetail"  separator=";">
+      update wms_purchase_detail
+      <set>
+        <if test="purchaseDetail.purchaseId != null">
+          purchase_id = #{purchaseDetail.purchaseId,jdbcType=BIGINT},
+        </if>
+        <if test="purchaseDetail.skuId != null">
+          sku_id = #{purchaseDetail.skuId,jdbcType=BIGINT},
+        </if>
+        <if test="purchaseDetail.skuNum != null">
+          sku_num = #{purchaseDetail.skuNum,jdbcType=INTEGER},
+        </if>
+        <if test="purchaseDetail.skuPrice != null">
+          sku_price = #{purchaseDetail.skuPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="purchaseDetail.wareId != null">
+          ware_id = #{purchaseDetail.wareId,jdbcType=BIGINT},
+        </if>
+        <if test="purchaseDetail.status != null">
+          `status` = #{purchaseDetail.status,jdbcType=INTEGER},
+        </if>
+      </set>
+      where id = #{purchaseDetail.id,jdbcType=BIGINT}
+    </foreach>
+
+  </update>
+
+  <select id="listDetailById" resultMap="BaseResultMap" >
+    select * from wms_purchase_detail where id in
+    <foreach collection="ids" item="id" separator=",">
+      (#{id})
+    </foreach>
+
+  </select>
+
+  <delete id="batchDelete" >
+    delete  from wms_purchase_detail where id in
+    <foreach collection="ids" item="id" separator=",">
+      (#{id})
+    </foreach>
+    </delete>
+</mapper>

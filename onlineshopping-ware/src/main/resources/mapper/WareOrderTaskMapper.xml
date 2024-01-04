@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.ware.mapper.WareOrderTaskMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.ware.entity.WareOrderTask">
+    <!--@mbg.generated-->
+    <!--@Table wms_ware_order_task-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+    <result column="consignee_tel" jdbcType="CHAR" property="consigneeTel" />
+    <result column="delivery_address" jdbcType="VARCHAR" property="deliveryAddress" />
+    <result column="order_comment" jdbcType="VARCHAR" property="orderComment" />
+    <result column="payment_way" jdbcType="BOOLEAN" property="paymentWay" />
+    <result column="task_status" jdbcType="TINYINT" property="taskStatus" />
+    <result column="order_body" jdbcType="VARCHAR" property="orderBody" />
+    <result column="tracking_no" jdbcType="CHAR" property="trackingNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ware_id" jdbcType="BIGINT" property="wareId" />
+    <result column="task_comment" jdbcType="VARCHAR" property="taskComment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, order_id, order_sn, consignee, consignee_tel, delivery_address, order_comment, 
+    payment_way, task_status, order_body, tracking_no, create_time, ware_id, task_comment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from wms_ware_order_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from wms_ware_order_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.ware.entity.WareOrderTask" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wms_ware_order_task (order_id, order_sn, consignee, 
+      consignee_tel, delivery_address, order_comment, 
+      payment_way, task_status, order_body, 
+      tracking_no, create_time, ware_id, 
+      task_comment)
+    values (#{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR}, 
+      #{consigneeTel,jdbcType=CHAR}, #{deliveryAddress,jdbcType=VARCHAR}, #{orderComment,jdbcType=VARCHAR}, 
+      #{paymentWay,jdbcType=BOOLEAN}, #{taskStatus,jdbcType=TINYINT}, #{orderBody,jdbcType=VARCHAR}, 
+      #{trackingNo,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{wareId,jdbcType=BIGINT}, 
+      #{taskComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.ware.entity.WareOrderTask" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into wms_ware_order_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderSn != null">
+        order_sn,
+      </if>
+      <if test="consignee != null">
+        consignee,
+      </if>
+      <if test="consigneeTel != null">
+        consignee_tel,
+      </if>
+      <if test="deliveryAddress != null">
+        delivery_address,
+      </if>
+      <if test="orderComment != null">
+        order_comment,
+      </if>
+      <if test="paymentWay != null">
+        payment_way,
+      </if>
+      <if test="taskStatus != null">
+        task_status,
+      </if>
+      <if test="orderBody != null">
+        order_body,
+      </if>
+      <if test="trackingNo != null">
+        tracking_no,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="wareId != null">
+        ware_id,
+      </if>
+      <if test="taskComment != null">
+        task_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null">
+        #{consigneeTel,jdbcType=CHAR},
+      </if>
+      <if test="deliveryAddress != null">
+        #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderComment != null">
+        #{orderComment,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentWay != null">
+        #{paymentWay,jdbcType=BOOLEAN},
+      </if>
+      <if test="taskStatus != null">
+        #{taskStatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderBody != null">
+        #{orderBody,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingNo != null">
+        #{trackingNo,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wareId != null">
+        #{wareId,jdbcType=BIGINT},
+      </if>
+      <if test="taskComment != null">
+        #{taskComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.ware.entity.WareOrderTask">
+    <!--@mbg.generated-->
+    update wms_ware_order_task
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderSn != null">
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null">
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null">
+        consignee_tel = #{consigneeTel,jdbcType=CHAR},
+      </if>
+      <if test="deliveryAddress != null">
+        delivery_address = #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderComment != null">
+        order_comment = #{orderComment,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentWay != null">
+        payment_way = #{paymentWay,jdbcType=BOOLEAN},
+      </if>
+      <if test="taskStatus != null">
+        task_status = #{taskStatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderBody != null">
+        order_body = #{orderBody,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingNo != null">
+        tracking_no = #{trackingNo,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wareId != null">
+        ware_id = #{wareId,jdbcType=BIGINT},
+      </if>
+      <if test="taskComment != null">
+        task_comment = #{taskComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.ware.entity.WareOrderTask">
+    <!--@mbg.generated-->
+    update wms_ware_order_task
+    set order_id = #{orderId,jdbcType=BIGINT},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      consignee_tel = #{consigneeTel,jdbcType=CHAR},
+      delivery_address = #{deliveryAddress,jdbcType=VARCHAR},
+      order_comment = #{orderComment,jdbcType=VARCHAR},
+      payment_way = #{paymentWay,jdbcType=BOOLEAN},
+      task_status = #{taskStatus,jdbcType=TINYINT},
+      order_body = #{orderBody,jdbcType=VARCHAR},
+      tracking_no = #{trackingNo,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ware_id = #{wareId,jdbcType=BIGINT},
+      task_comment = #{taskComment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

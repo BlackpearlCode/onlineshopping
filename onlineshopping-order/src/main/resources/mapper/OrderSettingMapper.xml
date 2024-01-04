@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineshopping.order.mapper.OrderSettingMapper">
+  <resultMap id="BaseResultMap" type="com.onlineshopping.order.entity.OrderSetting">
+    <!--@mbg.generated-->
+    <!--@Table oms_order_setting-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="flash_order_overtime" jdbcType="INTEGER" property="flashOrderOvertime" />
+    <result column="normal_order_overtime" jdbcType="INTEGER" property="normalOrderOvertime" />
+    <result column="confirm_overtime" jdbcType="INTEGER" property="confirmOvertime" />
+    <result column="finish_overtime" jdbcType="INTEGER" property="finishOvertime" />
+    <result column="comment_overtime" jdbcType="INTEGER" property="commentOvertime" />
+    <result column="member_level" jdbcType="TINYINT" property="memberLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, flash_order_overtime, normal_order_overtime, confirm_overtime, finish_overtime, 
+    comment_overtime, member_level
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from oms_order_setting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from oms_order_setting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.OrderSetting" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_order_setting (flash_order_overtime, normal_order_overtime, 
+      confirm_overtime, finish_overtime, comment_overtime, 
+      member_level)
+    values (#{flashOrderOvertime,jdbcType=INTEGER}, #{normalOrderOvertime,jdbcType=INTEGER}, 
+      #{confirmOvertime,jdbcType=INTEGER}, #{finishOvertime,jdbcType=INTEGER}, #{commentOvertime,jdbcType=INTEGER}, 
+      #{memberLevel,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.onlineshopping.order.entity.OrderSetting" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into oms_order_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flashOrderOvertime != null">
+        flash_order_overtime,
+      </if>
+      <if test="normalOrderOvertime != null">
+        normal_order_overtime,
+      </if>
+      <if test="confirmOvertime != null">
+        confirm_overtime,
+      </if>
+      <if test="finishOvertime != null">
+        finish_overtime,
+      </if>
+      <if test="commentOvertime != null">
+        comment_overtime,
+      </if>
+      <if test="memberLevel != null">
+        member_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flashOrderOvertime != null">
+        #{flashOrderOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="normalOrderOvertime != null">
+        #{normalOrderOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="confirmOvertime != null">
+        #{confirmOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="finishOvertime != null">
+        #{finishOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="commentOvertime != null">
+        #{commentOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="memberLevel != null">
+        #{memberLevel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineshopping.order.entity.OrderSetting">
+    <!--@mbg.generated-->
+    update oms_order_setting
+    <set>
+      <if test="flashOrderOvertime != null">
+        flash_order_overtime = #{flashOrderOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="normalOrderOvertime != null">
+        normal_order_overtime = #{normalOrderOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="confirmOvertime != null">
+        confirm_overtime = #{confirmOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="finishOvertime != null">
+        finish_overtime = #{finishOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="commentOvertime != null">
+        comment_overtime = #{commentOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="memberLevel != null">
+        member_level = #{memberLevel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineshopping.order.entity.OrderSetting">
+    <!--@mbg.generated-->
+    update oms_order_setting
+    set flash_order_overtime = #{flashOrderOvertime,jdbcType=INTEGER},
+      normal_order_overtime = #{normalOrderOvertime,jdbcType=INTEGER},
+      confirm_overtime = #{confirmOvertime,jdbcType=INTEGER},
+      finish_overtime = #{finishOvertime,jdbcType=INTEGER},
+      comment_overtime = #{commentOvertime,jdbcType=INTEGER},
+      member_level = #{memberLevel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
