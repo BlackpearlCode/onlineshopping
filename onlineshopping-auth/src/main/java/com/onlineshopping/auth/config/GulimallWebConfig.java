@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class OnlineshoppingWebConfig implements WebMvcConfigurer {
+public class GulimallWebConfig implements WebMvcConfigurer {
     /**
      * 视图映射
      */
