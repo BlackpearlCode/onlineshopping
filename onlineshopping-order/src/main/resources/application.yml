@@ -1,7 +1,9 @@
 spring.main.allow-circular-references: true
 
 seata:
+  # 事务服务组
   tx-service-group: my_test_tx_group
+  # 开启自动代理数据源，默认为false
   enable-auto-data-source-proxy: true
   registry:
     type: nacos
@@ -18,7 +20,9 @@ seata:
       server-addr: 47.99.142.201:8848
       group: SEATA_GROUP
   service:
+    # 服务分组映射
     vgroup-mapping:
+      # 服务分组: 应用分组
       my_test_tx_group: default
 
 
