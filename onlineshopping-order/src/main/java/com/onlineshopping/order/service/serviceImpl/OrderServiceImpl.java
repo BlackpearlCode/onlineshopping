@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.common.vo.TokenInfo;
 import com.rabbitmq.client.Channel;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -182,6 +183,7 @@ public class OrderServiceImpl implements OrderService{
         return confirmVo;
     }
 
+    @GlobalTransactional
     @Transactional
     @Override
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo submitVo) {

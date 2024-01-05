@@ -1,1 +1,27 @@
 spring.main.allow-circular-references: true
+
+seata:
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  registry:
+    type: nacos
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 47.99.142.201:8848
+      group: SEATA_GROUP
+  config:
+    type: nacos
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 47.99.142.201:8848
+      group: SEATA_GROUP
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+
+
+
+
+
