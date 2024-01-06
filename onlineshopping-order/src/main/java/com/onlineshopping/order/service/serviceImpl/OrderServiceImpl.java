@@ -248,7 +248,6 @@ public class OrderServiceImpl implements OrderService{
             if(r.getCode()==0){
                 //库存锁定成功
                 responseVo.setOrder(order.getOrder());
-                int i=10/0;
                 return responseVo;
             }else{
                 //库存锁定失败
