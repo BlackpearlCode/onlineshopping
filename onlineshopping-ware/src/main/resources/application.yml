@@ -32,7 +32,12 @@ seata:
     vgroup-mapping:
       # 服务分组: 应用分组
       my_test_tx_group: default
-
+  client:
+    rm:
+      # 重试次数
+      report-retry-count: 5
+      #是否上报成功状态
+      report-retry-enable: true
 
 
 

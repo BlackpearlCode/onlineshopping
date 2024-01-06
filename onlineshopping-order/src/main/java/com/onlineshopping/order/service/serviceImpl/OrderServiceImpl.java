@@ -1,6 +1,10 @@
 package com.onlineshopping.order.service.serviceImpl;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.onlineshopping.common.utils.Result;
+import com.onlineshopping.common.vo.TokenInfo;
 import com.onlineshopping.order.constant.OrderConstant;
 import com.onlineshopping.order.entity.Order;
 import com.onlineshopping.order.entity.OrderItem;
@@ -13,12 +17,10 @@ import com.onlineshopping.order.mapper.OrderMapper;
 import com.onlineshopping.order.service.OrderService;
 import com.onlineshopping.order.to.OrderCreateTo;
 import com.onlineshopping.order.vo.*;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.onlineshopping.common.utils.Result;
-import com.onlineshopping.common.vo.TokenInfo;
 import com.rabbitmq.client.Channel;
+import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -37,7 +39,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
-
+@Slf4j
 @RabbitListener(queues = {"hello-java-queue"})
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -169,7 +171,7 @@ public class OrderServiceImpl implements OrderService{
                 Result skusHasStock = wmsFeignService.getSkusHasStock(skuIds);
                 Object data = skusHasStock.get("data");
                 Gson gson=new Gson();
-                List<SkuStockVo> skuStockVos =gson.fromJson(data.toString(),new TypeToken<List<SkuStockVo>>(){}.getType());
+                List<SkuStockVo> skuStockVos =gson.fromJson(gson.toJson(data),new TypeToken<List<SkuStockVo>>(){}.getType());
                 if(!CollectionUtils.isEmpty(skuStockVos)){
                     Map<Long, Boolean> map = skuStockVos.stream().collect(Collectors.toMap(SkuStockVo::getSkuId, SkuStockVo::getHasStock));
                     confirmVo.setStocks(map);
@@ -187,6 +189,7 @@ public class OrderServiceImpl implements OrderService{
     @Transactional
     @Override
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo submitVo) {
+        log.info("globalTransactional begin, Xid:{}", RootContext.getXID());
         orderSubmitVoThreadLocal.set(submitVo);
         SubmitOrderResponseVo responseVo = new SubmitOrderResponseVo();
         //获取用户登录信息
@@ -206,7 +209,9 @@ public class OrderServiceImpl implements OrderService{
         //查询用户信息
         MemberVo memberInfo = memberFeignService.findMemberId(memberId);
         responseVo.setCode(0);
-        if (memberInfo == null) return null;
+        if (memberInfo == null) {
+            return null;
+        }
         //1.验证令牌【令牌的对比和删除必须保证原子性】
         //0:删除令牌失败；1：删除令牌成功
         String script="if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
@@ -243,6 +248,7 @@ public class OrderServiceImpl implements OrderService{
             if(r.getCode()==0){
                 //库存锁定成功
                 responseVo.setOrder(order.getOrder());
+                int i=10/0;
                 return responseVo;
             }else{
                 //库存锁定失败
@@ -424,8 +430,9 @@ public class OrderServiceImpl implements OrderService{
         Long skuId = cartItem.getSkuId();
         Result result = productFeignService.getSpuInfoBySkuId(skuId);
         Object data = result.get("data");
+        System.out.println("data--->"+data);
         Gson gson=new Gson();
-        SpuInfoVo spuInfoVo = gson.fromJson(gson.toJson(data), SpuInfoVo.class);
+        SpuInfoVo spuInfoVo = gson.fromJson(data.toString(), SpuInfoVo.class);
         orderItem.setSpuId(spuInfoVo.getId());
         orderItem.setSpuBrand(spuInfoVo.getBrandId().toString());
         orderItem.setSpuName(spuInfoVo.getSpuName());

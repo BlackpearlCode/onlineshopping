@@ -1,5 +1,6 @@
 package com.onlineshopping.product.controller;
 
+import com.google.gson.Gson;
 import com.onlineshopping.common.utils.BizCodeEnum;
 import com.onlineshopping.common.utils.PageEntity;
 import com.onlineshopping.common.utils.Result;
@@ -54,6 +55,9 @@ public class SpuInfoController {
     @GetMapping("/skuId/{id}")
     public Result getSpuInfoBySkuId(@PathVariable("id") Long id){
         PmsSpuInfo spuInfo =spuInfoService.getSpuInfoBySkuId(id);
-        return Result.r(BizCodeEnum.OK.getCode(),BizCodeEnum.OK.getMsg()).setData(spuInfo);
+        Gson gson=new Gson();
+        String json = gson.toJson(spuInfo);
+        System.out.println("json---->"+json);
+        return Result.r(BizCodeEnum.OK.getCode(),BizCodeEnum.OK.getMsg()).setData(json);
     }
 }

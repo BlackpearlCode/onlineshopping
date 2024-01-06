@@ -25,7 +25,7 @@ public class OrderItem implements Serializable {
     private Long orderId;
 
     /**
-    * order_sn
+    * order_sn 订单号
     */
     private String orderSn;
 
@@ -40,7 +40,7 @@ public class OrderItem implements Serializable {
     private String spuName;
 
     /**
-    * spu_pic
+    * spu_pic 商品种类图片
     */
     private String spuPic;
 

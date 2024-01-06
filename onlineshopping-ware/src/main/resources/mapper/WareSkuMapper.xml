@@ -134,8 +134,7 @@
     select ware_id from wms_ware_sku where sku_id=#{skuId,jdbcType=BIGINT} and stock-stock_locked > 0
   </select>
 
-  <select id="lockStock" resultType="java.lang.Long">
+  <update id="lockStock">
     update wms_ware_sku set stock_locked = stock_locked + #{num,jdbcType=INTEGER} where sku_id=#{skuId,jdbcType=BIGINT} and ware_id=#{wareId,jdbcType=BIGINT} and stock-stock_locked >= #{num,jdbcType=INTEGER}
-
-  </select>
+  </update>
 </mapper>
