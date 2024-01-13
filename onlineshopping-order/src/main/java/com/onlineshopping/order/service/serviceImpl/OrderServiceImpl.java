@@ -40,7 +40,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 @Slf4j
-@RabbitListener(queues = {"hello-java-queue"})
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -185,7 +184,7 @@ public class OrderServiceImpl implements OrderService{
         return confirmVo;
     }
 
-    @GlobalTransactional
+    //@GlobalTransactional
     @Transactional
     @Override
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo submitVo) {
@@ -278,22 +277,6 @@ public class OrderServiceImpl implements OrderService{
 
 
 
-    }
-
-    @RabbitHandler
-    public void receieveMessage(Message message, OrderReturnReason content, Channel channel) throws IOException {
-        System.out.println("收到消息：" + content);
-        long deliveryTag = message.getMessageProperties().getDeliveryTag();
-        System.out.println("deliveryTag--->"+deliveryTag);
-        //手动签收
-        channel.basicAck(deliveryTag,false);
-        /**
-         * 拒绝消息
-         * deliveryTag：消息的唯一标识
-         * multiple：是否批量拒绝
-         * requeue：是否重新入队；true：重新入队，false：不重新入队
-         */
-        // channel.basicNack(deliveryTag,false,true);
     }
 
     private OrderCreateTo createOrder(){
