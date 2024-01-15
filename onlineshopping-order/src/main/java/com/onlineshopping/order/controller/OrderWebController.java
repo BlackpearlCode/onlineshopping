@@ -1,5 +1,7 @@
 package com.onlineshopping.order.controller;
 
+import com.onlineshopping.common.utils.Result;
+import com.onlineshopping.order.entity.Order;
 import com.onlineshopping.order.exception.NoStockException;
 import com.onlineshopping.order.service.OrderService;
 import com.onlineshopping.order.vo.OrderConfirmVo;
@@ -9,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.concurrent.ExecutionException;
@@ -70,4 +74,18 @@ public class OrderWebController {
             return "redirect:http://order.onlineshopping.com/toTrade";
         }
     }
+
+    /**
+     * 查询订单状态
+     * @param orderSn：订单号
+     * @return
+     */
+    @GetMapping("/status/{orderSn}")
+    @ResponseBody
+    public Result getOrderStatus(@PathVariable("orderSn") String orderSn){
+        Order order=orderService.getOrderByOrderSn(orderSn);
+        return Result.ok().setData(order);
+    }
+
+
 }

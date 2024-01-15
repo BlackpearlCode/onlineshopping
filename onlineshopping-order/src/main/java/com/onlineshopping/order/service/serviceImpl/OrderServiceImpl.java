@@ -3,12 +3,12 @@ package com.onlineshopping.order.service.serviceImpl;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onlineshopping.common.to.mq.OrderTo;
 import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.common.vo.TokenInfo;
 import com.onlineshopping.order.constant.OrderConstant;
 import com.onlineshopping.order.entity.Order;
 import com.onlineshopping.order.entity.OrderItem;
-import com.onlineshopping.order.entity.OrderReturnReason;
 import com.onlineshopping.order.enume.OrderStatusEnum;
 import com.onlineshopping.order.exception.NoStockException;
 import com.onlineshopping.order.feign.*;
@@ -17,13 +17,9 @@ import com.onlineshopping.order.mapper.OrderMapper;
 import com.onlineshopping.order.service.OrderService;
 import com.onlineshopping.order.to.OrderCreateTo;
 import com.onlineshopping.order.vo.*;
-import com.rabbitmq.client.Channel;
-import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +28,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -62,6 +57,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private ProductFeignService productFeignService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     private ThreadLocal<OrderSubmitVo> orderSubmitVoThreadLocal=new ThreadLocal<>();
 
@@ -184,11 +182,11 @@ public class OrderServiceImpl implements OrderService{
         return confirmVo;
     }
 
-    //@GlobalTransactional
+
     @Transactional
     @Override
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo submitVo) {
-        log.info("globalTransactional begin, Xid:{}", RootContext.getXID());
+       // log.info("globalTransactional begin, Xid:{}", RootContext.getXID());
         orderSubmitVoThreadLocal.set(submitVo);
         SubmitOrderResponseVo responseVo = new SubmitOrderResponseVo();
         //获取用户登录信息
@@ -247,6 +245,8 @@ public class OrderServiceImpl implements OrderService{
             if(r.getCode()==0){
                 //库存锁定成功
                 responseVo.setOrder(order.getOrder());
+                //TODO 订单创建成功，发送消息给rabbitmq
+                rabbitTemplate.convertAndSend("order-event-exchange","order.create.order",order.getOrder());
                 return responseVo;
             }else{
                 //库存锁定失败
@@ -258,6 +258,34 @@ public class OrderServiceImpl implements OrderService{
             //金额对比失败
             responseVo.setCode(2);
             return responseVo;
+
+        }
+    }
+
+    @Override
+    public Order getOrderByOrderSn(String orderSn) {
+        Order order=orderMapper.selectByOrderSn(orderSn);
+        return order;
+    }
+
+    @Override
+    public void closeOrder(Order order) {
+        //查询当前订单的最新状态
+        Order orderEntity = orderMapper.selectByPrimaryKey(order.getId());
+
+        if(orderEntity.getStatus()==OrderStatusEnum.CREATE_NEW.getCode().intValue()){
+            //关单
+            orderEntity.setStatus((byte) OrderStatusEnum.CANCLED.getCode().intValue());
+            orderMapper.updateByPrimaryKeySelective(orderEntity);
+            //发送消息
+            try{
+                //TODO 保证消息一定会发送出去，每一个消息做一个日志记录保存到数据库
+                OrderTo orderTo = new OrderTo();
+                BeanUtils.copyProperties(orderEntity,orderTo);
+                rabbitTemplate.convertAndSend("order-event-exchange","order.release.other",orderTo);
+            }catch (Exception e){
+                //TODO 定期扫描数据库将没有发送成功的消息再次发送一遍
+            }
 
         }
     }

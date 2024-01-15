@@ -1,6 +1,9 @@
 package com.onlineshopping.ware.service;
 
 import com.onlineshopping.ware.entity.WareOrderTaskDetail;
+
+import java.util.List;
+
 public interface WareOrderTaskDetailService{
 
 
@@ -16,4 +19,9 @@ public interface WareOrderTaskDetailService{
 
     int updateByPrimaryKey(WareOrderTaskDetail record);
 
+    //保存库存订单详情
+    void save(WareOrderTaskDetail wareOrderTaskDetail);
+
+    //根据任务id获取订单详情
+    List<WareOrderTaskDetail> getOrderTaskDetailByTaskId(Long id);
 }

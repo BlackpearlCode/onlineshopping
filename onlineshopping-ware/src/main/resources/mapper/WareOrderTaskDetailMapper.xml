@@ -117,4 +117,8 @@
       lock_status = #{lockStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getOrderTaskDetailByTaskId" resultMap="BaseResultMap">
+    select * from wms_ware_order_task_detail where task_id = #{id} and lock_status = 1
+  </select>
 </mapper>

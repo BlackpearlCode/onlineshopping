@@ -541,4 +541,8 @@
             ,#{item.integrationAmount,jdbcType=DECIMAL}, #{item.realAmount,jdbcType=DECIMAL})
     </foreach>
   </insert>
+
+  <select id="selectByOrderSn" resultMap="BaseResultMap">
+    select * from oms_order where order_sn = #{orderSn,jdbcType=CHAR}
+    </select>
 </mapper>

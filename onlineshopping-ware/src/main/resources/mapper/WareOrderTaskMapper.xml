@@ -199,4 +199,8 @@
       task_comment = #{taskComment,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getOrderTaskByOrderSn" resultMap="BaseResultMap">
+    select * from wms_ware_order_task where order_sn = #{orderSn,jdbcType=VARCHAR}
+    </select>
 </mapper>

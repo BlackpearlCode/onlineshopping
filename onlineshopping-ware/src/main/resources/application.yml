@@ -1,57 +1,57 @@
 spring.main.allow-circular-references: true
-spring:
-  datasource:
-    hikari:
-      # 连接池最大连接数，默认是 10
-      maximum-pool-size: 60
-      # 链接超时时间，默认 30000(30 秒)
-      connection-timeout: 60000
-      # 空闲连接存活最大时间，默认 600000(10 分钟)
-      idle-timeout: 60000
-      # 连接将被测试活动的最大时间量
-      validation-timeout: 3000
-      # 此属性控制池中连接的最长生命周期，值 0 表示无限生命周期，默认 1800000(30 分钟)
-      max-lifetime: 60000
-      # 连接到数据库时等待的最长时间(秒)
-      login-timeout: 5
-      # 池中维护的最小空闲连接数
-      minimum-idle: 10
-seata:
-  #开启全局事务
-  enabled: true
-  # 事务服务组
-  tx-service-group: my_test_tx_group
-  # 开启自动代理数据源，默认为false
-  enableAutoDataSourceProxy: true
-  #设置seata-server的application-id
-  application-id: seata-server
-  registry:
-    type: nacos
-    nacos:
-      username: nacos
-      password: nacos
-      server-addr: 47.99.142.201:8848
-      group: SEATA_GROUP
-      namespace: dd03a879-e6bd-4d74-b12a-3dedc6c6490e
-  config:
-    type: nacos
-    nacos:
-      username: nacos
-      password: nacos
-      server-addr: 47.99.142.201:8848
-      group: SEATA_GROUP
-      namespace: dd03a879-e6bd-4d74-b12a-3dedc6c6490e
-  service:
-    # 服务分组映射
-    vgroup-mapping:
-      # 服务分组: 应用分组
-      my_test_tx_group: default
-  client:
-    rm:
-      # 重试次数
-      report-retry-count: 5
-      #是否上报成功状态
-      report-retry-enable: true
+#spring:
+#  datasource:
+#    hikari:
+#      # 连接池最大连接数，默认是 10
+#      maximum-pool-size: 60
+#      # 链接超时时间，默认 30000(30 秒)
+#      connection-timeout: 60000
+#      # 空闲连接存活最大时间，默认 600000(10 分钟)
+#      idle-timeout: 60000
+#      # 连接将被测试活动的最大时间量
+#      validation-timeout: 3000
+#      # 此属性控制池中连接的最长生命周期，值 0 表示无限生命周期，默认 1800000(30 分钟)
+#      max-lifetime: 60000
+#      # 连接到数据库时等待的最长时间(秒)
+#      login-timeout: 5
+#      # 池中维护的最小空闲连接数
+#      minimum-idle: 10
+#seata:
+#  #开启全局事务
+#  enabled: true
+#  # 事务服务组
+#  tx-service-group: my_test_tx_group
+#  # 开启自动代理数据源，默认为false
+#  enableAutoDataSourceProxy: true
+#  #设置seata-server的application-id
+#  application-id: seata-server
+#  registry:
+#    type: nacos
+#    nacos:
+#      username: nacos
+#      password: nacos
+#      server-addr: 47.99.142.201:8848
+#      group: SEATA_GROUP
+#      namespace: dd03a879-e6bd-4d74-b12a-3dedc6c6490e
+#  config:
+#    type: nacos
+#    nacos:
+#      username: nacos
+#      password: nacos
+#      server-addr: 47.99.142.201:8848
+#      group: SEATA_GROUP
+#      namespace: dd03a879-e6bd-4d74-b12a-3dedc6c6490e
+#  service:
+#    # 服务分组映射
+#    vgroup-mapping:
+#      # 服务分组: 应用分组
+#      my_test_tx_group: default
+#  client:
+#    rm:
+#      # 重试次数
+#      report-retry-count: 5
+#      #是否上报成功状态
+#      report-retry-enable: true
 
 
 

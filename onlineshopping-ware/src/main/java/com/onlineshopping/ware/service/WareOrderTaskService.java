@@ -16,4 +16,9 @@ public interface WareOrderTaskService{
 
     int updateByPrimaryKey(WareOrderTask record);
 
+    // 保存库存工作单
+    void save(WareOrderTask wareOrderTask);
+
+    // 查询库存工作单
+    WareOrderTask getOrderTaskByOrderSn(String orderSn);
 }

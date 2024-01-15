@@ -22,4 +22,6 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     void saveBatch(@Param("orderItems") List<OrderItem> orderItems);
+
+    Order selectByOrderSn(String orderSn);
 }

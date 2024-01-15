@@ -42,4 +42,14 @@ public class WareOrderTaskServiceImpl implements WareOrderTaskService{
         return wareOrderTaskMapper.updateByPrimaryKey(record);
     }
 
+    @Override
+    public void save(WareOrderTask wareOrderTask) {
+        wareOrderTaskMapper.insertSelective(wareOrderTask);
+    }
+
+    @Override
+    public WareOrderTask getOrderTaskByOrderSn(String orderSn) {
+        return wareOrderTaskMapper.getOrderTaskByOrderSn(orderSn);
+    }
+
 }

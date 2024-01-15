@@ -6,6 +6,7 @@ import com.onlineshopping.common.vo.TokenInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 
@@ -18,6 +19,11 @@ public class LoginUserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String uri = request.getRequestURI();
+        boolean match = new AntPathMatcher().match("/status/**", uri);
+        if(match){
+            return true;
+        }
         Object obj = request.getSession().getAttribute("loginUser");
         if(obj==null){
             //没登陆就去登录

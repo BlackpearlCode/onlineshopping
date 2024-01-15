@@ -26,4 +26,8 @@ public interface OrderService{
 
     // 提交订单
     SubmitOrderResponseVo submitOrder(OrderSubmitVo submitVo);
+    // 根据订单号查询订单
+    Order getOrderByOrderSn(String orderSn);
+    // 关闭订单
+    void closeOrder(Order order);
 }

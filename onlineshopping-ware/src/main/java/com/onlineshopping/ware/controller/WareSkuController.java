@@ -4,10 +4,10 @@ import com.onlineshopping.common.utils.BizCodeEnum;
 import com.onlineshopping.common.utils.PageEntity;
 import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.ware.exception.NoStockException;
+import com.onlineshopping.ware.feign.OrderFeignService;
 import com.onlineshopping.ware.service.serviceImpl.WareSkuServiceImpl;
 import com.onlineshopping.ware.vo.SkusHasStockVo;
 import com.onlineshopping.ware.vo.WareSkuLockVo;
-import io.seata.core.context.RootContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +24,9 @@ public class WareSkuController {
 
     @Autowired
     private WareSkuServiceImpl wareSkuService;
+
+    @Autowired
+    private OrderFeignService orderFeignService;
 
     @RequestMapping("/list")
     public Result<List<SkusHasStockVo>> list(@RequestParam Map<String,Object> params){
@@ -48,7 +51,7 @@ public class WareSkuController {
     @PostMapping("/lock/order")
     public Result orderLockStock(@RequestBody WareSkuLockVo vo){
         try {
-            log.info("globalTransactional begin, Xid:{}", RootContext.getXID());
+            //log.info("globalTransactional begin, Xid:{}", RootContext.getXID());
             Boolean stock=wareSkuService.orderLockStock(vo);
             return Result.ok();
         }catch (NoStockException e){

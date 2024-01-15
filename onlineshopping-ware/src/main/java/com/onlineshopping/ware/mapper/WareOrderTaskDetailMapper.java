@@ -3,6 +3,8 @@ package com.onlineshopping.ware.mapper;
 import com.onlineshopping.ware.entity.WareOrderTaskDetail;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface WareOrderTaskDetailMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,6 @@ public interface WareOrderTaskDetailMapper {
     int updateByPrimaryKeySelective(WareOrderTaskDetail record);
 
     int updateByPrimaryKey(WareOrderTaskDetail record);
+
+    List<WareOrderTaskDetail> getOrderTaskDetailByTaskId(Long id);
 }

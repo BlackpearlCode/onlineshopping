@@ -6,6 +6,8 @@ import com.onlineshopping.ware.service.WareOrderTaskDetailService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WareOrderTaskDetailServiceImpl implements WareOrderTaskDetailService{
 
@@ -40,6 +42,16 @@ public class WareOrderTaskDetailServiceImpl implements WareOrderTaskDetailServic
     @Override
     public int updateByPrimaryKey(WareOrderTaskDetail record) {
         return wareOrderTaskDetailMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public void save(WareOrderTaskDetail wareOrderTaskDetail) {
+        wareOrderTaskDetailMapper.insertSelective(wareOrderTaskDetail);
+    }
+
+    @Override
+    public List<WareOrderTaskDetail> getOrderTaskDetailByTaskId(Long id) {
+        return wareOrderTaskDetailMapper.getOrderTaskDetailByTaskId(id);
     }
 
 }

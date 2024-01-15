@@ -16,4 +16,6 @@ public interface WareOrderTaskMapper {
     int updateByPrimaryKeySelective(WareOrderTask record);
 
     int updateByPrimaryKey(WareOrderTask record);
+
+    WareOrderTask getOrderTaskByOrderSn(String orderSn);
 }

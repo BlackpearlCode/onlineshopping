@@ -137,4 +137,8 @@
   <update id="lockStock">
     update wms_ware_sku set stock_locked = stock_locked + #{num,jdbcType=INTEGER} where sku_id=#{skuId,jdbcType=BIGINT} and ware_id=#{wareId,jdbcType=BIGINT} and stock-stock_locked >= #{num,jdbcType=INTEGER}
   </update>
+
+  <update id="unlockStock" >
+    update wms_ware_sku set stock_locked = stock_locked - #{num,jdbcType=INTEGER} where sku_id=#{skuId,jdbcType=BIGINT} and ware_id=#{wareId,jdbcType=BIGINT}
+  </update>
 </mapper>

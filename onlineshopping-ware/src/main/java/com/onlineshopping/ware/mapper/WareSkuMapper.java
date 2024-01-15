@@ -33,4 +33,6 @@ public interface WareSkuMapper {
     List<Long> listWareIdHasStock(Long skuId);
 
     Long lockStock(@Param("skuId") Long skuId,@Param("wareId") Long wareId,@Param("num") Integer num);
+
+    void unlockStock(@Param("skuId") Long skuId,@Param("wareId") Long wareId,@Param("num") Integer num);
 }

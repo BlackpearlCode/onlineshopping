@@ -1,25 +1,17 @@
 package com.onlineshopping.order.config;
 
-import com.alibaba.fastjson.JSON;
-import com.onlineshopping.order.entity.Order;
-import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
-import org.springframework.amqp.support.converter.DefaultClassMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.amqp.RabbitTemplateConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.handler.annotation.Payload;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -53,6 +45,7 @@ public class MyRabbitConfig {
      *       simple:
      *         acknowledge-mode: manual
      */
+
     public void initRabbitTemplate(){
         /**
          * 		设置确认回调
@@ -60,7 +53,9 @@ public class MyRabbitConfig {
          *  ack： 消息是否成功收到
          * 	cause：失败的原因
          */
-        rabbitTemplate.setConfirmCallback((correlationData, ack , cause) -> log.info("\n收到消息: " + correlationData + "\tack: " + ack + "\tcause： " + cause));
+        rabbitTemplate.setConfirmCallback((correlationData, ack , cause) ->
+                //服务器收到消息
+                log.info("\n收到消息: " + correlationData + "\tack: " + ack + "\tcause： " + cause));
 
         /**
          * 设置消息抵达队列回调：可以很明确的知道那些消息失败了
@@ -74,6 +69,7 @@ public class MyRabbitConfig {
         rabbitTemplate.setReturnsCallback(new RabbitTemplate.ReturnsCallback() {
             @Override
             public void returnedMessage(ReturnedMessage returnedMessage) {
+                //服务器为收到消息，修改数据库当前消息的状态
                 log.error("Fail Message [" + returnedMessage.getMessage() + "]" + "\treplyCode: " + returnedMessage.getReplyCode() + "\treplyText:" + returnedMessage.getReplyText() + "\texchange:" + returnedMessage.getExchange() + "\trouterKey:" + returnedMessage.getRoutingKey());
             }
         });
@@ -101,7 +97,7 @@ public class MyRabbitConfig {
          */
         arguments.put("x-dead-letter-exchange", "order-event-exchange");
         arguments.put("x-dead-letter-routing-key","order.release.order");
-        arguments.put("x-message-ttl",60000);
+        arguments.put("x-message-ttl",120000);
         Queue queue = new Queue("order.delay.queue", true, false, false, arguments);
 
         return queue;
@@ -148,13 +144,24 @@ public class MyRabbitConfig {
      * @return
      */
     @Bean
-    public Binding orderCreateOrderBing(){
+    public Binding orderCreateOrderBinding(){
         Binding binding = new Binding("order.delay.queue", Binding.DestinationType.QUEUE, "order-event-exchange", "order.create.order", null);
         return binding;
     }
     @Bean
-    public Binding orderReleaseOrderBing(){
+    public Binding orderReleaseOrderBinding(){
         Binding binding = new Binding("order.release.order.queue", Binding.DestinationType.QUEUE, "order-event-exchange", "order.release.order", null);
+        return binding;
+    }
+
+    /**
+     *订单释放直接和库存进行绑定
+     *
+     * @return
+     */
+    @Bean
+    public Binding orderReleaseOtherBinding(){
+        Binding binding = new Binding("stock.release.stock.queue", Binding.DestinationType.QUEUE, "order-event-exchange", "order.release.other.#", null);
         return binding;
     }
 
@@ -174,14 +181,6 @@ public class MyRabbitConfig {
         return template;
     }
 
-
-
-
-    @RabbitListener(queues = "order.release.order.queue",ackMode = "MANUAL")
-    public void listener(@Payload Order order, Channel channel, Message message) throws IOException {
-        log.info("收到过期的订单消息，准备打印订单:,{}",order.getOrderSn());
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-    }
 
 
 
