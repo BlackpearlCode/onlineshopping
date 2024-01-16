@@ -3,6 +3,8 @@ package com.onlineshopping.order.mapper;
 import com.onlineshopping.order.entity.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface OrderItemMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,6 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem record);
 
     int updateByPrimaryKey(OrderItem record);
+
+    List<OrderItem> selectByOrderSn(String orderSn);
 }

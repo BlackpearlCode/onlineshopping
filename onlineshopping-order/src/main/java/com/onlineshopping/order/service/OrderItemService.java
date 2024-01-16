@@ -1,6 +1,9 @@
 package com.onlineshopping.order.service;
 
 import com.onlineshopping.order.entity.OrderItem;
+
+import java.util.List;
+
 public interface OrderItemService{
 
     int deleteByPrimaryKey(Long id);
@@ -15,4 +18,5 @@ public interface OrderItemService{
 
     int updateByPrimaryKey(OrderItem record);
 
+    List<OrderItem> selectByOrderSn(String orderSn);
 }

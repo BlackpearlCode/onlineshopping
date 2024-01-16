@@ -545,4 +545,8 @@
   <select id="selectByOrderSn" resultMap="BaseResultMap">
     select * from oms_order where order_sn = #{orderSn,jdbcType=CHAR}
     </select>
+
+  <select id="selectByMemberId" resultMap="BaseResultMap">
+    select * from oms_order where member_id = #{memberId,jdbcType=BIGINT}
+    </select>
 </mapper>

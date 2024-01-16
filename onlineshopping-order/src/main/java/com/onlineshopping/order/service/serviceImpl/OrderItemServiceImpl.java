@@ -6,6 +6,9 @@ import com.onlineshopping.order.service.OrderItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 @Slf4j
 public class OrderItemServiceImpl implements OrderItemService{
@@ -43,6 +46,12 @@ public class OrderItemServiceImpl implements OrderItemService{
     @Override
     public int updateByPrimaryKey(OrderItem record) {
         return orderItemMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<OrderItem> selectByOrderSn(String orderSn) {
+        List<OrderItem> orderItems = orderItemMapper.selectByOrderSn(orderSn);
+        return orderItems;
     }
 
 

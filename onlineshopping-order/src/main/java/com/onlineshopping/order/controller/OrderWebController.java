@@ -1,5 +1,6 @@
 package com.onlineshopping.order.controller;
 
+import com.onlineshopping.common.utils.PageEntity;
 import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.order.entity.Order;
 import com.onlineshopping.order.exception.NoStockException;
@@ -10,12 +11,10 @@ import com.onlineshopping.order.vo.SubmitOrderResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -86,6 +85,20 @@ public class OrderWebController {
         Order order=orderService.getOrderByOrderSn(orderSn);
         return Result.ok().setData(order);
     }
+
+    /**
+     * 分页查询当前登录用户的所有订单信息
+     * @param params
+     * @return
+     */
+
+    @PostMapping("/listWithItem")
+    @ResponseBody
+    public Result listWithItem(@RequestBody Map<String,Object> params){
+        PageEntity page=orderService.queryPageWithItem(params);
+        return Result.ok().put("page",page);
+    }
+
 
 
 }

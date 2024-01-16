@@ -24,4 +24,6 @@ public interface OrderMapper {
     void saveBatch(@Param("orderItems") List<OrderItem> orderItems);
 
     Order selectByOrderSn(String orderSn);
+
+    List<Order> selectByMemberId(Long id);
 }

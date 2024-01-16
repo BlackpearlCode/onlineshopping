@@ -1,5 +1,6 @@
 package com.onlineshopping.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单
@@ -226,6 +228,9 @@ public class Order implements Serializable {
     * 修改时间
     */
     private Date modifyTime;
+
+    @TableField(exist = false)
+    private List<OrderItem> items;
 
     private static final long serialVersionUID = 1L;
 }

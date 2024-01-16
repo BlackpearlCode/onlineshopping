@@ -270,4 +270,8 @@
       gift_growth = #{giftGrowth,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByOrderSn" resultMap="BaseResultMap">
+    select * from oms_order_item where order_sn = #{orderSn}
+  </select>
 </mapper>

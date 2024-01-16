@@ -1,9 +1,12 @@
 package com.onlineshopping.order.service.serviceImpl;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.onlineshopping.common.to.mq.OrderTo;
+import com.onlineshopping.common.utils.PageEntity;
 import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.common.vo.TokenInfo;
 import com.onlineshopping.order.constant.OrderConstant;
@@ -14,6 +17,7 @@ import com.onlineshopping.order.exception.NoStockException;
 import com.onlineshopping.order.feign.*;
 import com.onlineshopping.order.interceptor.LoginUserInterceptor;
 import com.onlineshopping.order.mapper.OrderMapper;
+import com.onlineshopping.order.service.OrderItemService;
 import com.onlineshopping.order.service.OrderService;
 import com.onlineshopping.order.to.OrderCreateTo;
 import com.onlineshopping.order.vo.*;
@@ -60,6 +64,11 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private OrderItemService orderItemService;
+    @Autowired
+    private OrderService orderService;
 
     private ThreadLocal<OrderSubmitVo> orderSubmitVoThreadLocal=new ThreadLocal<>();
 
@@ -288,6 +297,62 @@ public class OrderServiceImpl implements OrderService{
             }
 
         }
+    }
+
+    @Override
+    public PayVo getOrderPay(String orderSn) {
+        Order order = orderMapper.selectByOrderSn(orderSn);
+        PayVo payVo = new PayVo();
+        //设置总额
+        payVo.setTotal_amount(order.getPayAmount().setScale(2,BigDecimal.ROUND_HALF_UP).toString());
+        //设置订单号
+        payVo.setOut_trade_no(order.getOrderSn());
+        List<OrderItem> orderItems=orderItemService.selectByOrderSn(orderSn);
+        //设置订单主题
+        payVo.setSubject(orderItems.get(0).getSkuName());
+        //设置备注
+        payVo.setBody(orderItems.get(0).getSkuAttrsVals());
+        return payVo;
+    }
+
+    @Override
+    public List<Order> selectByMemberId(Long id) {
+        return orderMapper.selectByMemberId(id);
+    }
+
+    @Override
+    public PageEntity queryPageWithItem(Map<String, Object> params) {
+        TokenInfo tokenInfo = LoginUserInterceptor.loginUser.get();
+        if(tokenInfo==null){
+            return null;
+        }
+
+        String memberId="";
+        if(!StringUtils.isEmpty(tokenInfo.getUserId())){
+            //如果用户是账号登录
+            memberId=tokenInfo.getUserId();
+        }else{
+            //如果用户是第三方登录，
+            memberId=tokenInfo.getSocialUid();
+        }
+        //查询用户信息
+        MemberVo memberInfo = memberFeignService.findMemberId(memberId);
+
+        List<Order> orderList=orderService.selectByMemberId(memberInfo.getId());
+
+        List<Order> list =new LinkedList<>();
+        for(Order order: orderList){
+            String orderSn = order.getOrderSn();
+            List<OrderItem> orderItems = orderItemService.selectByOrderSn(orderSn);
+            order.setItems(orderItems);
+            list.add(order);
+        }
+        PageHelper.startPage((Integer) params.get("page"),10);
+        PageInfo<Order> pageInfo=new PageInfo<>(orderList);
+        pageInfo.setList(list);
+
+        PageEntity pageEntity=new PageEntity(pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
+        return pageEntity;
     }
 
     /**
