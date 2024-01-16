@@ -1,4 +1,8 @@
-spring.main.allow-circular-references: true
+
+spring:
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
 #spring:
 #  datasource:
 #    hikari:
