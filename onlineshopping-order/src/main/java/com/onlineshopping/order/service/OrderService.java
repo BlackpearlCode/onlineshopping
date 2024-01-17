@@ -2,11 +2,9 @@ package com.onlineshopping.order.service;
 
 import com.onlineshopping.common.utils.PageEntity;
 import com.onlineshopping.order.entity.Order;
-import com.onlineshopping.order.vo.OrderConfirmVo;
-import com.onlineshopping.order.vo.OrderSubmitVo;
-import com.onlineshopping.order.vo.PayVo;
-import com.onlineshopping.order.vo.SubmitOrderResponseVo;
+import com.onlineshopping.order.vo.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -40,4 +38,6 @@ public interface OrderService{
     List<Order> selectByMemberId(Long id);
 
     PageEntity queryPageWithItem(Map<String, Object> params);
+    //处理支付宝的支付结果
+    String handlePayResult(PayAsyncVo vo) throws ParseException;
 }

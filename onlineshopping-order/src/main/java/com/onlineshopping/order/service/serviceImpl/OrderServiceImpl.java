@@ -12,6 +12,7 @@ import com.onlineshopping.common.vo.TokenInfo;
 import com.onlineshopping.order.constant.OrderConstant;
 import com.onlineshopping.order.entity.Order;
 import com.onlineshopping.order.entity.OrderItem;
+import com.onlineshopping.order.entity.PaymentInfo;
 import com.onlineshopping.order.enume.OrderStatusEnum;
 import com.onlineshopping.order.exception.NoStockException;
 import com.onlineshopping.order.feign.*;
@@ -19,6 +20,7 @@ import com.onlineshopping.order.interceptor.LoginUserInterceptor;
 import com.onlineshopping.order.mapper.OrderMapper;
 import com.onlineshopping.order.service.OrderItemService;
 import com.onlineshopping.order.service.OrderService;
+import com.onlineshopping.order.service.PaymentInfoService;
 import com.onlineshopping.order.to.OrderCreateTo;
 import com.onlineshopping.order.vo.*;
 import lombok.extern.slf4j.Slf4j;
@@ -33,10 +35,13 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 @Slf4j
 @Service
@@ -69,6 +74,9 @@ public class OrderServiceImpl implements OrderService{
     private OrderItemService orderItemService;
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private PaymentInfoService paymentInfoService;
 
     private ThreadLocal<OrderSubmitVo> orderSubmitVoThreadLocal=new ThreadLocal<>();
 
@@ -353,6 +361,31 @@ public class OrderServiceImpl implements OrderService{
 
         PageEntity pageEntity=new PageEntity(pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
         return pageEntity;
+    }
+
+    @Transactional
+    @Override
+    public String handlePayResult(PayAsyncVo vo) throws ParseException {
+        //保存交易流水
+        PaymentInfo payment = new PaymentInfo();
+        payment.setAlipayTradeNo(vo.getTrade_no());
+        payment.setOrderSn(vo.getOut_trade_no());
+        payment.setPaymentStatus(vo.getTrade_status());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        payment.setCallbackTime(format.parse(vo.getNotify_time()));
+        paymentInfoService.insertSelective(payment);
+
+        //修改订单状态
+        if(vo.getTrade_status().equals("TRADE_SUCCESS")||vo.getTrade_status().equals("TREAD_FINISHED")){
+            //支付成功状态
+            String outTradeNo = vo.getOut_trade_no();
+            Order order=new Order();
+            order.setOrderSn(outTradeNo);
+            order.setStatus(OrderStatusEnum.PAYED.getCode().byteValue());
+            orderMapper.updateByOrderSn(outTradeNo,OrderStatusEnum.PAYED.getCode().byteValue());
+            return "success";
+        }
+        return "error";
     }
 
     /**

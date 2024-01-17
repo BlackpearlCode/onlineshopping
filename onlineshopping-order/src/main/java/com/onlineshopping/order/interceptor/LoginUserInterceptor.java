@@ -20,8 +20,10 @@ public class LoginUserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
-        boolean match = new AntPathMatcher().match("/status/**", uri);
-        if(match){
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+        boolean match = antPathMatcher.match("/status/**", uri);
+        boolean match1 = antPathMatcher.match("/payed/notify", uri);
+        if(match || match1){
             return true;
         }
         Object obj = request.getSession().getAttribute("loginUser");

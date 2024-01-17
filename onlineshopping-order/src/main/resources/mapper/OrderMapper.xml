@@ -549,4 +549,9 @@
   <select id="selectByMemberId" resultMap="BaseResultMap">
     select * from oms_order where member_id = #{memberId,jdbcType=BIGINT}
     </select>
+
+  <update id="updateByOrderSn">
+    update oms_order set status = #{status,jdbcType=CHAR} where order_sn = #{orderSn,jdbcType=CHAR}
+
+  </update>
 </mapper>

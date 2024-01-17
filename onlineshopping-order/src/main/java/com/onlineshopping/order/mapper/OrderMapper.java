@@ -2,6 +2,7 @@ package com.onlineshopping.order.mapper;
 
 import com.onlineshopping.order.entity.Order;
 import com.onlineshopping.order.entity.OrderItem;
+import com.onlineshopping.order.enume.OrderStatusEnum;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,4 +27,6 @@ public interface OrderMapper {
     Order selectByOrderSn(String orderSn);
 
     List<Order> selectByMemberId(Long id);
+
+    void updateByOrderSn( @Param("orderSn") String orderSn,@Param("status") Byte status);
 }
