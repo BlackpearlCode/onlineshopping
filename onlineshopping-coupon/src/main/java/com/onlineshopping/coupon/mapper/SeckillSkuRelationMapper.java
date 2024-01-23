@@ -3,6 +3,8 @@ package com.onlineshopping.coupon.mapper;
 import com.onlineshopping.coupon.entity.SeckillSkuRelation;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SeckillSkuRelationMapper {
     int deleteByPrimaryKey(Long id);
@@ -16,4 +18,6 @@ public interface SeckillSkuRelationMapper {
     int updateByPrimaryKeySelective(SeckillSkuRelation record);
 
     int updateByPrimaryKey(SeckillSkuRelation record);
+
+    List<SeckillSkuRelation> getSkuIdByPromotionSessionId(Long promotionSessionId);
 }

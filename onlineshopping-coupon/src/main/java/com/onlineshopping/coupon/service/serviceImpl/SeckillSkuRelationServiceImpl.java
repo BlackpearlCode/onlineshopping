@@ -6,6 +6,8 @@ import com.onlineshopping.coupon.service.SeckillSkuRelationService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class SeckillSkuRelationServiceImpl implements SeckillSkuRelationService{
@@ -41,6 +43,11 @@ public class SeckillSkuRelationServiceImpl implements SeckillSkuRelationService{
     @Override
     public int updateByPrimaryKey(SeckillSkuRelation record) {
         return seckillSkuRelationMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<SeckillSkuRelation> getSkuIdByPromotionSessionId(Long promotionSessionId) {
+        return seckillSkuRelationMapper.getSkuIdByPromotionSessionId(promotionSessionId);
     }
 
 }

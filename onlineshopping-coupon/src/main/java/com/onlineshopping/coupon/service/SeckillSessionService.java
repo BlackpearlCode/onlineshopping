@@ -1,6 +1,9 @@
 package com.onlineshopping.coupon.service;
 
 import com.onlineshopping.coupon.entity.SeckillSession;
+
+import java.util.List;
+
 public interface SeckillSessionService{
 
 
@@ -16,4 +19,5 @@ public interface SeckillSessionService{
 
     int updateByPrimaryKey(SeckillSession record);
 
+    List<SeckillSession> getLatest3DaysSession();
 }

@@ -129,4 +129,8 @@
       seckill_sort = #{seckillSort,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="getSkuIdByPromotionSessionId" resultMap="BaseResultMap">
+    select * from sms_seckill_sku_relation where promotion_session_id = #{promotionSessionId}
+    </select>
 </mapper>

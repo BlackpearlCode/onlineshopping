@@ -33,6 +33,7 @@
         <module>onlineshopping-auth</module>
         <module>onlineshopping-redis</module>
         <module>onlineshopping-cart</module>
+        <module>onlineshopping-seckill</module>
     </modules>
 
 </project>

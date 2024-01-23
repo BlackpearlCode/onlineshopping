@@ -1,6 +1,9 @@
 package com.onlineshopping.coupon.service;
 
 import com.onlineshopping.coupon.entity.SeckillSkuRelation;
+
+import java.util.List;
+
 public interface SeckillSkuRelationService{
 
 
@@ -16,4 +19,5 @@ public interface SeckillSkuRelationService{
 
     int updateByPrimaryKey(SeckillSkuRelation record);
 
+    List<SeckillSkuRelation> getSkuIdByPromotionSessionId(Long promotionSessionId);
 }
