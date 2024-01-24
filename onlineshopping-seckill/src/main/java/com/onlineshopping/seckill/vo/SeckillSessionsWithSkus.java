@@ -32,10 +32,7 @@ public class SeckillSessionsWithSkus {
      */
     private Boolean status;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+
 
     private List<SeckillSkuVo> relationSkus;
 }

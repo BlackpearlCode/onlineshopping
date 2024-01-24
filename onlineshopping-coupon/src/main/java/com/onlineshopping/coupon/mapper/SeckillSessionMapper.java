@@ -22,5 +22,5 @@ public interface SeckillSessionMapper {
     int updateByPrimaryKey(SeckillSession record);
 
 
-    List<SeckillSession> getLatest3DaysSession(@Param("startTime")LocalDateTime startTime,  @Param("endTime") LocalDateTime endTime);
+    List<SeckillSession> getLatest3DaysSession(@Param("startTime")String startTime,  @Param("endTime") String endTime);
 }

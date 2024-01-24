@@ -17,8 +17,9 @@ public class SeckillSkuScheduled {
 
     @Autowired
     private SeckillService seckillService;
-    @Scheduled(cron = "0 0 3 * * ?")
+    @Scheduled(cron = "0 * * * * ?")
     public void uploadSeckillSkuLatest3Days(){
+        log.info("定时上架秒杀商品任务启动。。。。。");
         seckillService.uploadSeckillSkuLatest3Days();
     }
 }

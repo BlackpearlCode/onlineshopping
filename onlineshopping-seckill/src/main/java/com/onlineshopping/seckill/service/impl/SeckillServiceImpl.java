@@ -1,7 +1,9 @@
 package com.onlineshopping.seckill.service.impl;
 
+
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.TypeReference;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.seckill.feign.CouponFeignService;
 import com.onlineshopping.seckill.feign.ProductFeignService;
@@ -11,7 +13,6 @@ import com.onlineshopping.seckill.to.SeckillSkuRedisTo;
 import com.onlineshopping.seckill.vo.SeckillSessionsWithSkus;
 import com.onlineshopping.seckill.vo.SeckillSkuVo;
 import com.onlineshopping.seckill.vo.SkuInfoVo;
-
 import org.redisson.api.RSemaphore;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
@@ -49,8 +50,8 @@ public class SeckillServiceImpl implements SeckillService {
         Result session = couponFeignService.getLatest3DaysSession();
         if(session.getCode() == 0){
             Object object = session.get("data");
-            Gson gson=new Gson();
-            List<SeckillSessionsWithSkus> sessionData = gson.fromJson(object.toString(), new TypeToken<List<SeckillSessionsWithSkus>>() {}.getType());
+
+            List<SeckillSessionsWithSkus> sessionData = JSON.parseObject(JSON.toJSONString(object), new TypeReference<>() {});
             //将活动信息和商品信息上传到redis
             //1.缓存活动信息
             saveSessionInfo(sessionData);
@@ -79,8 +80,10 @@ public class SeckillServiceImpl implements SeckillService {
                 //1.sku的基本信息
                 Result result = productFeignService.info(seckillSkuVo.getSkuId());
                 if (result.getCode()==0){
-                    Gson gson = new Gson();
-                    SkuInfoVo sku = gson.fromJson(result.get("sku").toString(), SkuInfoVo.class);
+                    Object object = result.get("sku");
+                    SkuInfoVo sku =JSON.parseObject(JSON.toJSONString(object),new TypeReference<>() {});
+//                    Gson gson = new Gson();
+//                    SkuInfoVo sku = gson.fromJson(result.get("sku").toString(), SkuInfoVo.class);
                     redisTo.setSkuInfo(sku);
                 }
                 //2.sku的秒杀信息

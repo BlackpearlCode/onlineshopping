@@ -49,8 +49,6 @@ public class SeckillSession implements Serializable {
     /**
      * 该场次活动关联的商品
      */
-    @TableField(exist = false)
     private List<SeckillSkuRelation> relationSkus;
-
     private static final long serialVersionUID = 1L;
 }

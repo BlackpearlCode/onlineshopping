@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,12 +60,16 @@ public class SeckillSessionServiceImpl implements SeckillSessionService{
     @Override
     public List<SeckillSession> getLatest3DaysSession() {
         //计算最近三天
-        LocalDateTime startTime = startTime();
-        LocalDateTime endTime = endTime();
+        String startTime = startTime();
+        String endTime = endTime();
         List<SeckillSession> list=seckillSessionMapper.getLatest3DaysSession(startTime,endTime);
         if(CollectionUtils.isEmpty(list)){
             return null;
         }
+
+
+
+
         List<SeckillSession> collect = list.stream().map(session -> {
             Long id = session.getId();
             List<SeckillSkuRelation> relations=seckillSkuRelationService.getSkuIdByPromotionSessionId(id);
@@ -77,22 +79,22 @@ public class SeckillSessionServiceImpl implements SeckillSessionService{
         return collect;
     }
 
-    private LocalDateTime startTime() {
+    private String startTime() {
         LocalDate now = LocalDate.now();
         LocalTime min = LocalTime.MIN;
         LocalDateTime start = LocalDateTime.of(now, min);
-        //String format = start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        return start;
+        String format = start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return format;
     }
 
-    private LocalDateTime endTime() {
+    private String endTime() {
         LocalDate now = LocalDate.now();
         LocalDate localDate = now.plusDays(2);
         LocalTime max = LocalTime.MAX;
         LocalDateTime end = LocalDateTime.of(localDate, max);
-        //String format = end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String format = end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        return end;
+        return format;
     }
 
 }
