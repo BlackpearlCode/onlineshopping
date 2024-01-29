@@ -15,14 +15,10 @@ import org.redisson.api.RSemaphore;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.ConnectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,9 +36,9 @@ public class SeckillServiceImpl implements SeckillService {
     @Autowired
     private RedissonClient redissonClient;
 
-    private final String SESSION_CACHE_PREFIX = "seckill:session:info";
+    private final String SESSION_CACHE_PREFIX = "seckill:session:";
     private final String SKUKILL_CACHE_PREFIX = "seckill:skus";
-    private final String SKU_STOCK_SEMAPHORE="seckill:stock:semaphore";
+    private final String SKU_STOCK_SEMAPHORE="seckill:stock:";
 
     @Override
     public void uploadSeckillSkuLatest3Days() {
@@ -61,6 +57,42 @@ public class SeckillServiceImpl implements SeckillService {
             }
 
         }
+    }
+
+    @Override
+    public List<SeckillSkuRedisTo> getCurrentSeckillSkus() {
+        //1.确定当前时间属于那个秒杀场次
+        long time = new Date().getTime();
+        Set<String> keys = redisFeignService.sGet(SESSION_CACHE_PREFIX + "*");
+        for(String key:keys){
+            String replace = key.replace("seckill:session:", "");
+            String[] s = replace.split("_");
+            Long start =Long.parseLong(s[0]);
+            Long end=Long.parseLong(s[1]);
+            if(time>=start && time<=end){
+                //2.获取这个秒杀场次需要的所有商品信息
+                List<String> value = redisFeignService.getValue(key);
+                Map<String, Object> map = redisFeignService.getMap("seckill:skus");
+                if(!CollectionUtils.isEmpty(map)){
+                    //根据sku获取商品信息
+                    if(!CollectionUtils.isEmpty(value)){
+                        //将商品信息转换为SeckillSkuRedisTo
+                        List<SeckillSkuRedisTo> collect = value.stream().map(item -> {
+                            Object o = map.get(item);
+                            SeckillSkuRedisTo to = JSON.parseObject(JSON.toJSONString(o), SeckillSkuRedisTo.class);
+                            return to;
+                        }).collect(Collectors.toList());
+                        return collect;
+                    }
+                }
+
+
+
+                break;
+            }
+        };
+
+        return null;
     }
 
     private void saveSessionInfo(List<SeckillSessionsWithSkus> sessions){

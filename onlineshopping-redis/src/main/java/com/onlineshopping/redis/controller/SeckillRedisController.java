@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class SeckillRedisController {
@@ -28,5 +30,20 @@ public class SeckillRedisController {
     @RequestMapping("/KeyIsExist")
     public Boolean KeyIsExist(@RequestParam("key") String key){
         return redisUtil.hasKey(key);
+    }
+
+    @RequestMapping("/sGet")
+    public Set<String> sGet(@RequestParam("key") String key){
+        return redisUtil.fuzzyQueryByKey(key);
+    }
+
+    @RequestMapping("/getValue")
+    public List<String> getValue(@RequestParam("key")String key ){
+        return redisUtil.lGet(key,0,-1);
+    }
+
+    @RequestMapping("/getMap")
+    public<T> Map<String, T> getMap(@RequestParam("key")String key){
+        return redisUtil.hmget(key);
     }
 }

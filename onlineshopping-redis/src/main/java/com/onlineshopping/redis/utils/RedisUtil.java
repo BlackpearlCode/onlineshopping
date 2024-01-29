@@ -378,6 +378,15 @@ public final class RedisUtil {
     // ============================set=============================
 
     /**
+     * 根据key模糊匹配，获取能匹配的key对应的值
+     * @param key
+     * @return
+     */
+    public Set<String> fuzzyQueryByKey(String key){
+        return readTemplate().keys(key);
+    }
+
+    /**
      * 根据key获取Set中的所有值
      * @param key 键
      */
@@ -489,7 +498,7 @@ public final class RedisUtil {
      * @param start 开始
      * @param end   结束 0 到 -1代表所有值
      */
-    public List<Object> lGet(String key, long start, long end) {
+    public List<String> lGet(String key, long start, long end) {
         try {
             return readTemplate().opsForList().range(key, start, end);
         } catch (Exception e) {
@@ -648,5 +657,7 @@ public final class RedisUtil {
         }
 
     }
+
+
 
 }
