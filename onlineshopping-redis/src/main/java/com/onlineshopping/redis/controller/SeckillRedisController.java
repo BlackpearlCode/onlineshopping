@@ -24,4 +24,9 @@ public class SeckillRedisController {
     public void saveMap(@RequestParam("key") String key, @RequestBody Map<String, Object> map){
         redisUtil.hmset(key, map);
     }
+
+    @RequestMapping("/KeyIsExist")
+    public Boolean KeyIsExist(@RequestParam("key") String key){
+        return redisUtil.hasKey(key);
+    }
 }

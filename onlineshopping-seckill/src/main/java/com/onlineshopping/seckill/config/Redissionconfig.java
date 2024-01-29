@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RedisSsionconfig {
+public class Redissionconfig {
 
     /**
      * destroyMethod = "shutdown":销毁方法，服务停止后会调用这个方法进行销毁

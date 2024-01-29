@@ -14,5 +14,8 @@ public interface RedisFeignService {
 
     @RequestMapping("/saveMap")
     public void saveMap(@RequestParam("key") String key, @RequestBody Map<String, Object> map);
+
+    @RequestMapping("/KeyIsExist")
+    public Boolean KeyIsExist(@RequestParam("key") String key);
 }
 
