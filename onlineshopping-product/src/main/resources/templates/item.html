@@ -523,14 +523,14 @@
 							<span>￥</span>
 							<span th:text="${#numbers.formatDecimal(item.info.price,3,2)}">4499.00</span>
 						</li>
-						<li style="color: red" >
+						<li style="color: red" th:if="${item.seckillInfo != null}">
 
-                            <span >
-                                商品将会在进行秒杀
+                            <span th:if="${#dates.createNow().getTime() < item.seckillInfo.startTime}">
+                                商品将会在[[${#dates.format(new java.util.Date(item.seckillInfo.startTime),"yyyy-MM-dd HH:mm:ss")}]]进行秒杀
                             </span>
 
-							<span >
-                                秒杀价  ]
+							<span th:if="${#dates.createNow().getTime() >= item.seckillInfo.startTime && #dates.createNow().getTime() <= item.seckillInfo.endTime}">
+                                秒杀价  [[${#numbers.formatDecimal(item.seckillInfo.seckillPrice,1,2)}]]
                             </span>
 
 						</li>

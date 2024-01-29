@@ -21,5 +21,7 @@ public class SkuItemVo {
     private PmsSpuInfoDesc desc;
     //获取spu的规格参数信息
     private List<SpuItemAttrGroupVo>   groupAttrs;
+    //秒杀信息
+    private SeckillInfoVo seckillInfo;
 
 }

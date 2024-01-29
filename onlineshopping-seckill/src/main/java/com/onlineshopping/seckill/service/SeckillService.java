@@ -9,4 +9,7 @@ public interface SeckillService {
 
     // 获取当前时间可以参与秒杀的商品
     List<SeckillSkuRedisTo> getCurrentSeckillSkus();
+
+    // 获取商品的秒杀信息
+    SeckillSkuRedisTo getSkuSeckillInfo(Long skuId);
 }

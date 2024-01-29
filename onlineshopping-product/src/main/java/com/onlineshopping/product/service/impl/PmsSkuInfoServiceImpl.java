@@ -1,12 +1,16 @@
 package com.onlineshopping.product.service.impl;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.TypeReference;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.onlineshopping.common.to.MemberPriceTo;
 import com.onlineshopping.common.to.SkuReductionTo;
 import com.onlineshopping.common.utils.PageEntity;
+import com.onlineshopping.common.utils.Result;
 import com.onlineshopping.product.entity.*;
 import com.onlineshopping.product.feign.CouponFeignService;
+import com.onlineshopping.product.feign.SeckillFeignService;
 import com.onlineshopping.product.mapper.PmsSkuImagesMapper;
 import com.onlineshopping.product.mapper.PmsSkuInfoMapper;
 import com.onlineshopping.product.mapper.PmsSkuSaleAttrValueMapper;
@@ -54,6 +58,9 @@ public class PmsSkuInfoServiceImpl implements PmsSkuInfoService {
 
     @Autowired
     private ThreadPoolExecutor executor;
+
+    @Autowired
+    private SeckillFeignService seckillFeignService;
 
     @Override
     public int deleteByPrimaryKey(Long skuId) {
@@ -215,8 +222,21 @@ public class PmsSkuInfoServiceImpl implements PmsSkuInfoService {
             item.setImages(images);
         }, executor);
 
+        //查询当前sku是否参与秒杀活动
+
+        CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
+            Result seckillInfo = seckillFeignService.getSkuSeckillInfo(skuId);
+            if(seckillInfo.getCode()==0){
+                Object object = seckillInfo.get("data");
+                SeckillInfoVo seckillInfoVo = JSON.parseObject(JSON.toJSONString(object), new TypeReference<>() {});
+                item.setSeckillInfo(seckillInfoVo);
+            }
+        }, executor);
+
+
         //等待所有任务都完成
-        CompletableFuture.allOf(infoFuture,saleAttrFuture,descFuture,baseAttrFuture,imageFuture).get();
+        CompletableFuture.allOf(infoFuture,saleAttrFuture,descFuture,baseAttrFuture,imageFuture,seckillFuture).get();
+
 
 
         return item;

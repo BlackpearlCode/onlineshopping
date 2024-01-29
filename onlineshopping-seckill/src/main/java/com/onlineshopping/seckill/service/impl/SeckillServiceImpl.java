@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,6 +93,30 @@ public class SeckillServiceImpl implements SeckillService {
             }
         };
 
+        return null;
+    }
+
+    @Override
+    public SeckillSkuRedisTo getSkuSeckillInfo(Long skuId) {
+        //找到所有需要参与秒杀的商品的key
+        Map<String, Object> map = redisFeignService.getMap(SKUKILL_CACHE_PREFIX);
+        if(!CollectionUtils.isEmpty(map)){
+            String regx="\\d_"+skuId;
+            for (String key:map.keySet()){
+                if(Pattern.matches(regx,key)){
+                    Object o = map.get(key);
+                    SeckillSkuRedisTo to = JSON.parseObject(JSON.toJSONString(o), SeckillSkuRedisTo.class);
+                    //处理随机码
+                    Long startTime = to.getStartTime();
+                    Long current = new Date().getTime();
+                    Long endTime = to.getEndTime();
+                    if(!(current>=startTime && current<=endTime)){
+                        to.setRandomCode(null);
+                    }
+                    return to;
+                }
+            }
+        }
         return null;
     }
 
